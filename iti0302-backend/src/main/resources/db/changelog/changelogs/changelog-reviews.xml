@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+    <changeSet id="2023-10-17 create reviews table" author="Morten Tsinakov">
+        <createTable tableName="reviews">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_reviews" />
+            </column>
+            <column name="user_id" type="INT">
+                <constraints foreignKeyName="fk_reviews_user_id" references="users(id)" deleteCascade="true" />
+            </column>
+            <column name="album_id" type="INT" >
+                <constraints foreignKeyName="fk_reviews_album_id" references="albums(id)" deleteCascade="true"/>
+            </column>
+            <column name="review" type="VARCHAR(500)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2023-10-17 unique constraint for (user_id, album_id)" author="Morten Tsinakov">
+        <addUniqueConstraint tableName="reviews" columnNames="user_id, album_id" constraintName="uq_reviews_user_id_album_id" />
+    </changeSet>
+    <changeSet id="2023-11-27 add datetime column to reviews table" author="Morten Tsinakov">
+        <addColumn tableName="reviews">
+            <column name="timestamp" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP" />
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+    <changeSet id="2023-10-10 create tracks table" author="Morten Tsinakov">
+        <createTable tableName="tracks">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_tracks" />
+            </column>
+            <column name="rank" type="INT" />
+            <column name="name" type="VARCHAR(255)" />
+            <column name="duration" type="INT" />
+            <column name="album_id" type="INT">
+                <constraints foreignKeyName="fk_tracks" references="albums(id)" />
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2023-10-11 drop foreign key constraint" author="Morten Tsinakov">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fk_tracks" />
+        </preConditions>
+        <dropForeignKeyConstraint baseTableName="tracks" constraintName="fk_tracks" />
+        <addForeignKeyConstraint baseTableName="tracks" baseColumnNames="album_id" constraintName="fk_tracks_album_id" referencedTableName="albums"
+                                 referencedColumnNames="id" onDelete="CASCADE" />
+    </changeSet>
+</databaseChangeLog>

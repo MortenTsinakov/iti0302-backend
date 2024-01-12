@@ -1,0 +1,21 @@
+###
+POST http://localhost:8080/api/later-listen
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlcnQiLCJpYXQiOjE3MDIwNDA0NTgsImV4cCI6MTcwMjY0NTI1OH0.5JlFNQKKj6WYA69FVAjr-RAC-VAD8bkWMImLcg0L6z8
+Content-Type: application/json
+
+{
+  "albumId": 4
+}
+
+###
+DELETE http://localhost:8080/api/later-listen
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNSIsImlhdCI6MTcwMTQzMzM5NiwiZXhwIjoxNzAyMDM4MTk2fQ.X0nMfZ6x7nqMnL8FPUdTF28ai7QxSwYm6KhJhpPysNo
+Content-Type: application/json
+
+{
+  "albumId": 4
+}
+
+###
+GET http://localhost:8080/api/later-listen/my-later-listens
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNyIsImlhdCI6MTcwMTI2MDU1NiwiZXhwIjoxNzAxODY1MzU2fQ.UtPjHZPDv9_UkW-CP0U887h5UJuR7CTSif0is4rj2Ko

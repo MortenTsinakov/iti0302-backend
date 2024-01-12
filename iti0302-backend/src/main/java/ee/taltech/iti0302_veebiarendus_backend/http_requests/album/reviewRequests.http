@@ -1,0 +1,40 @@
+###
+POST http://localhost:8080/api/review
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlcnQiLCJpYXQiOjE3MDIwNDA0NTgsImV4cCI6MTcwMjY0NTI1OH0.5JlFNQKKj6WYA69FVAjr-RAC-VAD8bkWMImLcg0L6z8
+Content-Type: application/json
+
+{
+  "albumId": 3,
+  "text": "Test review"
+}
+
+###
+PUT http://localhost:8080/api/review
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNyIsImlhdCI6MTcwMTI2MTA2MiwiZXhwIjoxNzAxODY1ODYyfQ.fSv3UvYXstdgSR1XjeuMFZhawcJ6vbuT8cYF0wSBCmw
+Content-Type: application/json
+
+{
+  "albumId": 4,
+  "text": "Excellent"
+}
+
+###
+DELETE http://localhost:8080/api/review
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNyIsImlhdCI6MTcwMTI2MTA2MiwiZXhwIjoxNzAxODY1ODYyfQ.fSv3UvYXstdgSR1XjeuMFZhawcJ6vbuT8cYF0wSBCmw
+Content-Type: application/json
+
+{
+  "albumId": 4
+}
+
+###
+GET http://localhost:8080/api/review/my-reviews
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlcnQiLCJpYXQiOjE3MDIwMzgzODksImV4cCI6MTcwMjY0MzE4OX0.tLWHU83EaaRqQtQYTpMbhSEM8u5FQm_ScfgS0I7jg4k
+
+###
+GET http://localhost:8080/api/review/users-latest?user=1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNyIsImlhdCI6MTcwMTI2MTA2MiwiZXhwIjoxNzAxODY1ODYyfQ.fSv3UvYXstdgSR1XjeuMFZhawcJ6vbuT8cYF0wSBCmw
+
+###
+GET http://localhost:8080/api/review/friends-latest?page=1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTcwMTc3NzM5NCwiZXhwIjoxNzAyMzgyMTk0fQ.LFFfnKgAjHNshGXcW_-smTCtwLPJjxUJ2aHO4uvKMQA

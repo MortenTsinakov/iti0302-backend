@@ -1,0 +1,23 @@
+###
+# If user4 doesn't exist yet, the user should be created and saved. A JWT should be returned
+POST http://localhost:8080/api/auth/sign-up
+Content-Type: application/json
+
+{
+  "username": "user11",
+  "password": "password",
+  "email": "user11@email.com"
+}
+
+###
+# If the username and password are correct then a JWT should be returned
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "Albert",
+  "password": "passwordForAlbert"
+}
+
+###
+POST http://localhost:8080/api/auth/logout

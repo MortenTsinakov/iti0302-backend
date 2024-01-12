@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+    <changeSet id="2023-10-13 create later-listens table" author="Morten Tsinakov">
+        <createTable tableName="later-listens">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_later-listens" />
+            </column>
+            <column name="user_id" type="INT">
+                <constraints foreignKeyName="fk_later_listens_user_id" references="users(id)" deleteCascade="true" />
+            </column>
+            <column name="album_id" type="INT" >
+                <constraints foreignKeyName="fk_later_listens_album_id" references="albums(id)" deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2023-10-12 unique constraint for (user_id, album_id)" author="Morten Tsinakov">
+        <addUniqueConstraint tableName="later-listens" columnNames="user_id, album_id" constraintName="uq_later_listens_user_id_album_id" />
+    </changeSet>
+</databaseChangeLog>

@@ -57,6 +57,6 @@ jwt.secret.key = JdLE5TJpQf2bt9duhHYdjcaUZToux9i8i64yvhJKXLbm8cX7bn
 5. Run the project from IntelliJ or with './gradlew bootRun' command
 
 PS! You have to add to application.properties:
-1. Last.fm API key (can be created on last.fm website).
+- Last.fm API key (can be created on last.fm website).
 
 Without Last.fm API key the album search function doesn't work and fetching album info works only if the album is already in the database. 

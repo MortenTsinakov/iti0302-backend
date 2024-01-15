@@ -1,4 +1,4 @@
-This project was made while taking Web Application Project (iti0302) lecture in Taltech
+This project was made while taking Web Application Project (iti0302) lecture in Taltech.
 
 ## OneLouder
 
@@ -59,4 +59,7 @@ jwt.secret.key = JdLE5TJpQf2bt9duhHYdjcaUZToux9i8i64yvhJKXLbm8cX7bn
 PS! You have to add to application.properties:
 - Last.fm API key (can be created on last.fm website).
 
-Without Last.fm API key the album search function doesn't work and fetching album info works only if the album is already in the database. 
+Without Last.fm API key the album search function doesn't work and fetching album info works only if the album is already in the database.
+I added some initial data using Liquibase, so it's possible to get a feel of the app even without the search function. You can log in using the following credentials:
+- username: test
+- password: password

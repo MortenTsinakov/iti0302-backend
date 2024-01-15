@@ -2062,4 +2062,10 @@
             <column name="review" value="This album weaves a mesmerizing tapestry of diverse sonic landscapes, effortlessly blending haunting melodies with intricate rhythms." />
         </insert>
     </changeSet>
+    <changeSet id="2024-01-15 add correct image to King Krule album" author="Morten Tsinakov">
+        <update tableName="albums">
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/32618fce0370ea48771b8e9d4cd47f4f.jpg" />
+            <where> id = 19 </where>
+        </update>
+    </changeSet>
 </databaseChangeLog>

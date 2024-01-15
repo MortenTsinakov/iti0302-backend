@@ -1,12 +1,10 @@
 package ee.taltech.iti0302_veebiarendus_backend.album.service;
 
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.albumDto.AlbumSearchDto;
-import ee.taltech.iti0302_veebiarendus_backend.album.dto.likeDto.LatestLikeDto;
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.ratingDto.LatestRatingDto;
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.ratingDto.RatingRequest;
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.ratingDto.RatingResponse;
 import ee.taltech.iti0302_veebiarendus_backend.album.entity.Album;
-import ee.taltech.iti0302_veebiarendus_backend.album.entity.Like;
 import ee.taltech.iti0302_veebiarendus_backend.album.entity.Rating;
 import ee.taltech.iti0302_veebiarendus_backend.album.mapper.ratingMapper.RatingMapper;
 import ee.taltech.iti0302_veebiarendus_backend.album.repository.AlbumRepository;
@@ -20,7 +18,6 @@ import ee.taltech.iti0302_veebiarendus_backend.user.entity.Follow;
 import ee.taltech.iti0302_veebiarendus_backend.user.entity.User;
 import ee.taltech.iti0302_veebiarendus_backend.user.repository.FollowRepository;
 import ee.taltech.iti0302_veebiarendus_backend.user.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -40,7 +37,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -65,7 +61,6 @@ class RateServiceTest {
 
     @Test
     void rateAlbum() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         RatingRequest ratingRequest = new RatingRequest(1L, 5);
 
         User user = new User();
@@ -78,13 +73,13 @@ class RateServiceTest {
 
         ResponseEntity<RatingResponse> expected = ResponseEntity.ok(new RatingResponse(ratingRequest.rating()));
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(ratingRequest.albumId())).thenReturn(Optional.of(album));
         when(ratingMapper.createRating(eq(user), eq(album), eq(ratingRequest.rating()), any(Timestamp.class))).thenReturn(rating);
 
-        ResponseEntity<RatingResponse> result = rateService.rateAlbum(request, ratingRequest);
+        ResponseEntity<RatingResponse> result = rateService.rateAlbum(ratingRequest);
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(ratingRequest.albumId());
         verify(ratingMapper).createRating(eq(user), eq(album), eq(ratingRequest.rating()), any(Timestamp.class));
         verify(ratingRepository).save(argThat(r -> r.getAlbum() == album && r.getUser() == user & r.getScore() == ratingRequest.rating()));
@@ -93,59 +88,42 @@ class RateServiceTest {
     }
 
     @Test
-    void rateAlbumUserNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        RatingRequest ratingRequest = new RatingRequest(1L, 5);
-
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.empty());
-
-        assertThrows(InvalidOperationException.class, () -> rateService.rateAlbum(request, ratingRequest));
-
-        verify(authService).getUserFromRequest(request);
-    }
-
-    @Test
     void rateAlbumAlbumNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         RatingRequest ratingRequest = new RatingRequest(1L, 5);
         User user = new User();
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(ratingRequest.albumId())).thenReturn(Optional.empty());
 
-        assertThrows(InvalidOperationException.class, () -> rateService.rateAlbum(request, ratingRequest));
+        assertThrows(InvalidOperationException.class, () -> rateService.rateAlbum(ratingRequest));
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(ratingRequest.albumId());
     }
 
     @Test
     void rateAlbumRatingIsNull() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         RatingRequest ratingRequest = new RatingRequest(1L, null);
 
-        assertThrows(InvalidInputException.class, () -> rateService.rateAlbum(request, ratingRequest));
+        assertThrows(InvalidInputException.class, () -> rateService.rateAlbum(ratingRequest));
     }
 
     @Test
     void rateAlbumRatingLessThanOne() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         RatingRequest ratingRequest = new RatingRequest(1L, 0);
 
-        assertThrows(InvalidInputException.class, () -> rateService.rateAlbum(request, ratingRequest));
+        assertThrows(InvalidInputException.class, () -> rateService.rateAlbum(ratingRequest));
     }
 
     @Test
     void rateAlbumRatingGreaterThanTen() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         RatingRequest ratingRequest = new RatingRequest(1L, 11);
 
-        assertThrows(InvalidInputException.class, () -> rateService.rateAlbum(request, ratingRequest));
+        assertThrows(InvalidInputException.class, () -> rateService.rateAlbum(ratingRequest));
     }
 
     @Test
     void updateAlbumRating() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         RatingRequest ratingRequest = new RatingRequest(1L, 5);
         User user = new User();
         Album album = new Album();
@@ -156,13 +134,13 @@ class RateServiceTest {
 
         ResponseEntity<RatingResponse> expected = ResponseEntity.ok(new RatingResponse(ratingRequest.rating()));
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(ratingRequest.albumId())).thenReturn(Optional.of(album));
         when(ratingRepository.findRatingByAlbumAndUser(album, user)).thenReturn(Optional.of(rating));
 
-        ResponseEntity<RatingResponse> actual = rateService.updateAlbumRating(request, ratingRequest);
+        ResponseEntity<RatingResponse> actual = rateService.updateAlbumRating(ratingRequest);
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(ratingRequest.albumId());
         verify(ratingRepository).findRatingByAlbumAndUser(album, user);
         verify(ratingRepository).save(argThat(r -> r.getAlbum() == album && r.getUser() == user && r.getScore() == ratingRequest.rating()));
@@ -171,72 +149,55 @@ class RateServiceTest {
     }
 
     @Test
-    void updateAlbumRatingUserNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        RatingRequest ratingRequest = new RatingRequest(1L, 5);
-
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.empty());
-
-        assertThrows(InvalidOperationException.class, () -> rateService.updateAlbumRating(request, ratingRequest));
-
-        verify(authService).getUserFromRequest(request);
-    }
-
-    @Test
     void updateAlbumRatingAlbumNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         RatingRequest ratingRequest = new RatingRequest(1L, 5);
         User user = new User();
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(ratingRequest.albumId())).thenReturn(Optional.empty());
 
-        assertThrows(InvalidOperationException.class, () -> rateService.updateAlbumRating(request, ratingRequest));
+        assertThrows(InvalidOperationException.class, () -> rateService.updateAlbumRating(ratingRequest));
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(ratingRequest.albumId());
     }
 
     @Test
     void updateAlbumRatingRatingNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         RatingRequest ratingRequest = new RatingRequest(1L, 5);
         User user = new User();
         Album album = new Album();
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(ratingRequest.albumId())).thenReturn(Optional.of(album));
         when(ratingRepository.findRatingByAlbumAndUser(album, user)).thenReturn(Optional.empty());
 
-        assertThrows(InvalidOperationException.class, () -> rateService.updateAlbumRating(request, ratingRequest));
+        assertThrows(InvalidOperationException.class, () -> rateService.updateAlbumRating(ratingRequest));
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(ratingRequest.albumId());
         verify(ratingRepository).findRatingByAlbumAndUser(album, user);
     }
 
     @Test
     void updateAlbumRatingRatingIsNull() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         RatingRequest ratingRequest = new RatingRequest(1L, null);
 
-        assertThrows(InvalidInputException.class, () -> rateService.updateAlbumRating(request, ratingRequest));
+        assertThrows(InvalidInputException.class, () -> rateService.updateAlbumRating(ratingRequest));
     }
 
     @Test
     void updateAlbumRatingRatingIsLessThanOne() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         RatingRequest ratingRequest = new RatingRequest(1L, 0);
 
-        assertThrows(InvalidInputException.class, () -> rateService.updateAlbumRating(request, ratingRequest));
+        assertThrows(InvalidInputException.class, () -> rateService.updateAlbumRating(ratingRequest));
     }
 
     @Test
     void updateAlbumRatingRatingIsGreaterThanTen() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         RatingRequest ratingRequest = new RatingRequest(1L, 11);
 
-        assertThrows(InvalidInputException.class, () -> rateService.updateAlbumRating(request, ratingRequest));
+        assertThrows(InvalidInputException.class, () -> rateService.updateAlbumRating(ratingRequest));
     }
 
     @Test
@@ -301,7 +262,6 @@ class RateServiceTest {
 
     @Test
     void getFriendsLatestRatings() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         User user = new User();
         User followed = new User();
         Follow follow = new Follow();
@@ -333,15 +293,15 @@ class RateServiceTest {
 
         Page<Rating> likesPage = new PageImpl<>(ratings);
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(followRepository.findAllByFollowerId(user)).thenReturn(List.of(follow));
         when(ratingRepository.findAllByUserIn(eq(followedList), any(Pageable.class))).thenReturn(likesPage);
         when(ratingMapper.ratingsToLatestRatingDtoList(likesPage.getContent())).thenReturn(ratingDtoList);
 
         ResponseEntity<List<LatestRatingDto>> expected = ResponseEntity.ok(ratingDtoList);
-        ResponseEntity<List<LatestRatingDto>> actual = rateService.getFriendsLatestRatings(request, 0);
+        ResponseEntity<List<LatestRatingDto>> actual = rateService.getFriendsLatestRatings(0);
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(followRepository).findAllByFollowerId(user);
         verify(ratingRepository).findAllByUserIn(eq(followedList), any(Pageable.class));
         verify(ratingMapper).ratingsToLatestRatingDtoList(likesPage.getContent());
@@ -351,8 +311,7 @@ class RateServiceTest {
 
     @Test
     void getFriendsLatestRatingsUserNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.empty());
-        assertThrows(RuntimeException.class, () -> rateService.getFriendsLatestRatings(request, 0));
+        when(authService.getUserFromSecurityContextHolder()).thenThrow(ClassCastException.class);
+        assertThrows(RuntimeException.class, () -> rateService.getFriendsLatestRatings(0));
     }
 }

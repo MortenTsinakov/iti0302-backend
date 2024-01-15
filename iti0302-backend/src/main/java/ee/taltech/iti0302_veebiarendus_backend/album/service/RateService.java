@@ -17,7 +17,6 @@ import ee.taltech.iti0302_veebiarendus_backend.user.entity.Follow;
 import ee.taltech.iti0302_veebiarendus_backend.user.entity.User;
 import ee.taltech.iti0302_veebiarendus_backend.user.repository.FollowRepository;
 import ee.taltech.iti0302_veebiarendus_backend.user.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -44,18 +43,18 @@ public class RateService {
     private final FollowRepository followRepository;
     private final RatingMapper ratingMapper;
 
-    public ResponseEntity<RatingResponse> rateAlbum(HttpServletRequest request, RatingRequest ratingRequest) throws InvalidOperationException, InvalidInputException {
+    public ResponseEntity<RatingResponse> rateAlbum(RatingRequest ratingRequest) throws InvalidOperationException, InvalidInputException {
         validateRating(ratingRequest.rating());
-        User user = authService.getUserFromRequest(request).orElseThrow(() -> new InvalidOperationException("Rating album failed: user not found"));
+        User user = authService.getUserFromSecurityContextHolder();
         Album album = albumRepository.findById(ratingRequest.albumId()).orElseThrow(() -> new InvalidOperationException("Rating album failed: album not found"));
         Rating rating = ratingMapper.createRating(user, album, ratingRequest.rating(), Timestamp.from(Instant.now()));
         ratingRepository.save(rating);
         return ResponseEntity.ok(new RatingResponse(rating.getScore()));
     }
 
-    public ResponseEntity<RatingResponse> updateAlbumRating(HttpServletRequest request, RatingRequest ratingRequest) throws InvalidOperationException {
+    public ResponseEntity<RatingResponse> updateAlbumRating(RatingRequest ratingRequest) throws InvalidOperationException {
         validateRating(ratingRequest.rating());
-        User user = authService.getUserFromRequest(request).orElseThrow(() -> new InvalidOperationException("Updating rating failed: user not found"));
+        User user = authService.getUserFromSecurityContextHolder();
         Album album = albumRepository.findById(ratingRequest.albumId()).orElseThrow(() -> new InvalidOperationException("Updating rating failed: album not found"));
         Rating rating = ratingRepository.findRatingByAlbumAndUser(album, user).orElseThrow(() -> new InvalidOperationException("Updating rating failed: rating not found"));
         rating.setScore(ratingRequest.rating());
@@ -79,8 +78,8 @@ public class RateService {
         return ResponseEntity.ok(ratings);
     }
 
-    public ResponseEntity<List<LatestRatingDto>> getFriendsLatestRatings(HttpServletRequest request, Integer page) {
-        User user = authService.getUserFromRequest(request).orElseThrow(() -> new RuntimeException("Failed to fetch latest rates for friends: User making the request not found"));
+    public ResponseEntity<List<LatestRatingDto>> getFriendsLatestRatings(Integer page) {
+        User user = authService.getUserFromSecurityContextHolder();
         List<User> followed = followRepository.findAllByFollowerId(user).stream().map(Follow::getFollowedId).toList();
 
         Sort sort = Sort.by("timestamp").descending();

@@ -1,10 +1,10 @@
 ###
 # Should return a list of albums that match the search term
-GET http://localhost:8080/api/album/search?album=green
+GET http://localhost:8080/api/album/search?album=nevermind
 
 <> 2023-09-30T183318.200.json
 
 ###
 # Should return a specific album
-GET http://localhost:8080/api/album/info?album=eieksisteeri&artist=polesellist
-#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNyIsImlhdCI6MTcwMTI2NDU4NCwiZXhwIjoxNzAxODY5Mzg0fQ.tf9n3kkLaXgQWy4-ChImFJs5AW6EyT-9t-Y2ZS5FJyw
+GET http://localhost:8080/api/album/info?album=nevermind&artist=nirvana
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcwNTMyMzM1OCwiZXhwIjoxNzA1OTI4MTU4fQ.6-IK4NAPu706bdKqnkqDj_iEF-c0Aw2AaqrWmZgMi1Q

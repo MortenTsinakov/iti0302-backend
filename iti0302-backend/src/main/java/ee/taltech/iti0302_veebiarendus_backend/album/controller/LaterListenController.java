@@ -4,7 +4,6 @@ import ee.taltech.iti0302_veebiarendus_backend.album.dto.laterListenDto.LaterLis
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.laterListenDto.LaterListenResponse;
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.laterListenDto.MyLaterListenDto;
 import ee.taltech.iti0302_veebiarendus_backend.album.service.LaterListenService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,17 +25,17 @@ public class LaterListenController {
     private final LaterListenService laterListenService;
 
     @PostMapping
-    public ResponseEntity<LaterListenResponse> addLaterListen(HttpServletRequest request, @RequestBody LaterListenRequest laterListenRequest) {
-        return laterListenService.addLaterListen(request, laterListenRequest);
+    public ResponseEntity<LaterListenResponse> addLaterListen(@RequestBody LaterListenRequest laterListenRequest) {
+        return laterListenService.addLaterListen(laterListenRequest);
     }
 
     @DeleteMapping
-    public ResponseEntity<LaterListenResponse> removeLaterListen(HttpServletRequest request, @RequestBody LaterListenRequest removeLaterListenRequest) {
-        return laterListenService.removeLaterListen(request, removeLaterListenRequest);
+    public ResponseEntity<LaterListenResponse> removeLaterListen(@RequestBody LaterListenRequest removeLaterListenRequest) {
+        return laterListenService.removeLaterListen(removeLaterListenRequest);
     }
 
     @GetMapping("/my-later-listens")
-    public ResponseEntity<List<MyLaterListenDto>> getAllLaterListens(HttpServletRequest request) {
-        return laterListenService.getAllLaterListens(request);
+    public ResponseEntity<List<MyLaterListenDto>> getAllLaterListens() {
+        return laterListenService.getAllLaterListens();
     }
 }

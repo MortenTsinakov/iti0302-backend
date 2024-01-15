@@ -3,7 +3,6 @@ package ee.taltech.iti0302_veebiarendus_backend.album.controller;
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.albumDto.AlbumInfoDto;
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.albumDto.AlbumSearchDto;
 import ee.taltech.iti0302_veebiarendus_backend.album.service.AlbumService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,10 +22,9 @@ public class AlbumController {
     private final AlbumService albumService;
 
     @GetMapping("/info")
-    public ResponseEntity<AlbumInfoDto> getAlbumInfo(HttpServletRequest request,
-                                                     @RequestParam(name = "album") String album,
+    public ResponseEntity<AlbumInfoDto> getAlbumInfo(@RequestParam(name = "album") String album,
                                                      @RequestParam(name = "artist") String artist) {
-        return albumService.getAlbumInfo(request, album, artist);
+        return albumService.getAlbumInfo(album, artist);
     }
 
     @GetMapping("/search")

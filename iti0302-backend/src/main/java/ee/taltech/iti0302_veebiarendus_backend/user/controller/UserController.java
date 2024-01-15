@@ -12,7 +12,6 @@ import ee.taltech.iti0302_veebiarendus_backend.user.dto.FollowingResponse;
 import ee.taltech.iti0302_veebiarendus_backend.user.dto.UserDto;
 import ee.taltech.iti0302_veebiarendus_backend.user.dto.UserProfileResponse;
 import ee.taltech.iti0302_veebiarendus_backend.user.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,52 +38,52 @@ public class UserController {
     }
 
     @PostMapping("/follow")
-    public void followUser(HttpServletRequest request, @RequestBody FollowRequest followRequest) {
-        userService.followUser(request, followRequest);
+    public void followUser(@RequestBody FollowRequest followRequest) {
+        userService.followUser(followRequest);
     }
 
     @DeleteMapping("/unfollow")
-    public void unfollowUser(HttpServletRequest request, @RequestBody FollowRequest followRequest) {
-        userService.unfollowUser(request, followRequest);
+    public void unfollowUser(@RequestBody FollowRequest followRequest) {
+        userService.unfollowUser(followRequest);
     }
 
     @GetMapping("/followers-stats")
-    public ResponseEntity<FollowerStatsResponse> getFollowerStats(HttpServletRequest request) {
-        return userService.getFollowerStats(request);
+    public ResponseEntity<FollowerStatsResponse> getFollowerStats() {
+        return userService.getFollowerStats();
     }
 
     @GetMapping("/followers")
-    public ResponseEntity<List<FollowersResponse>> getFollowers(HttpServletRequest request, @RequestParam(name = "page") Integer page) {
-        return userService.getFollowers(request, page);
+    public ResponseEntity<List<FollowersResponse>> getFollowers(@RequestParam(name = "page") Integer page) {
+        return userService.getFollowers(page);
     }
 
     @GetMapping("/following")
-    public ResponseEntity<List<FollowingResponse>> getFollowing(HttpServletRequest request, @RequestParam(name = "page") Integer page) {
-        return userService.getFollowing(request, page);
+    public ResponseEntity<List<FollowingResponse>> getFollowing(@RequestParam(name = "page") Integer page) {
+        return userService.getFollowing(page);
     }
 
     @GetMapping("/profile")
-    public ResponseEntity<UserProfileResponse> getUserProfile(HttpServletRequest request, @RequestParam(name = "user") Integer id) {
-        return userService.getUserProfile(request, id);
+    public ResponseEntity<UserProfileResponse> getUserProfile(@RequestParam(name = "user") Integer id) {
+        return userService.getUserProfile(id);
     }
 
     @PutMapping("/username")
-    public ResponseEntity<ChangeUsernameResponse> changeUsername(HttpServletRequest request, @RequestBody ChangeUsernameRequest changeUsernameRequest) {
-        return userService.changeUsername(request, changeUsernameRequest);
+    public ResponseEntity<ChangeUsernameResponse> changeUsername(@RequestBody ChangeUsernameRequest changeUsernameRequest) {
+        return userService.changeUsername(changeUsernameRequest);
     }
 
     @PutMapping("/email")
-    public void changeEmail(HttpServletRequest request, @RequestBody ChangeEmailRequest changeEmailRequest) {
-        userService.changeEmail(request, changeEmailRequest);
+    public void changeEmail(@RequestBody ChangeEmailRequest changeEmailRequest) {
+        userService.changeEmail(changeEmailRequest);
     }
 
     @PutMapping("/password")
-    public void changePassword(HttpServletRequest request, @RequestBody ChangePasswordRequest changePasswordRequest) {
-        userService.changePassword(request, changePasswordRequest);
+    public void changePassword(@RequestBody ChangePasswordRequest changePasswordRequest) {
+        userService.changePassword(changePasswordRequest);
     }
 
     @DeleteMapping("/delete")
-    public void deleteUser(HttpServletRequest request, @RequestBody DeleteUserRequest deleteUserRequest) {
-        userService.deleteUser(request, deleteUserRequest);
+    public void deleteUser(@RequestBody DeleteUserRequest deleteUserRequest) {
+        userService.deleteUser(deleteUserRequest);
     }
 }

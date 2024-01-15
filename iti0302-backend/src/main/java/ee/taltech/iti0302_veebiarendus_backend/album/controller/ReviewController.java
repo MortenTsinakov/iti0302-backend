@@ -6,7 +6,6 @@ import ee.taltech.iti0302_veebiarendus_backend.album.dto.reviewDto.ReviewDeleteR
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.reviewDto.ReviewResponse;
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.reviewDto.ReviewPostRequest;
 import ee.taltech.iti0302_veebiarendus_backend.album.service.ReviewService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,23 +29,23 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @PostMapping
-    public ResponseEntity<ReviewResponse> reviewAlbum(HttpServletRequest request, @RequestBody ReviewPostRequest reviewRequest) {
-        return reviewService.reviewAlbum(request, reviewRequest);
+    public ResponseEntity<ReviewResponse> reviewAlbum(@RequestBody ReviewPostRequest reviewRequest) {
+        return reviewService.reviewAlbum(reviewRequest);
     }
 
     @PutMapping
-    public ResponseEntity<ReviewResponse> updateReview(HttpServletRequest request, @RequestBody ReviewPostRequest updateRequest) {
-        return reviewService.updateReview(request, updateRequest);
+    public ResponseEntity<ReviewResponse> updateReview(@RequestBody ReviewPostRequest updateRequest) {
+        return reviewService.updateReview(updateRequest);
     }
 
     @DeleteMapping
-    public void deleteReview(HttpServletRequest request, @RequestBody ReviewDeleteRequest deleteRequest) {
-        reviewService.deleteReview(request, deleteRequest);
+    public void deleteReview(@RequestBody ReviewDeleteRequest deleteRequest) {
+        reviewService.deleteReview(deleteRequest);
     }
 
     @GetMapping("/my-reviews")
-    public ResponseEntity<List<MyReviewDto>> getAllUserReviews(HttpServletRequest request) {
-        return reviewService.getAllUserReviews(request);
+    public ResponseEntity<List<MyReviewDto>> getAllUserReviews() {
+        return reviewService.getAllUserReviews();
     }
 
 
@@ -56,7 +55,7 @@ public class ReviewController {
     }
 
     @GetMapping("/friends-latest")
-    public ResponseEntity<List<LatestReviewDto>> getFriendsReviews(@RequestParam(name = "page") Integer page, HttpServletRequest request) {
-        return reviewService.getFriendsLatestReviews(request, page);
+    public ResponseEntity<List<LatestReviewDto>> getFriendsReviews(@RequestParam(name = "page") Integer page) {
+        return reviewService.getFriendsLatestReviews(page);
     }
 }

@@ -19,7 +19,6 @@ import ee.taltech.iti0302_veebiarendus_backend.user.entity.Follow;
 import ee.taltech.iti0302_veebiarendus_backend.user.entity.User;
 import ee.taltech.iti0302_veebiarendus_backend.user.repository.FollowRepository;
 import ee.taltech.iti0302_veebiarendus_backend.user.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -46,18 +45,18 @@ public class ReviewService {
     private final AuthenticationService authService;
     private final ReviewMapper reviewMapper;
 
-    public ResponseEntity<ReviewResponse> reviewAlbum(HttpServletRequest request, ReviewPostRequest reviewRequest) throws InvalidOperationException, InvalidInputException {
+    public ResponseEntity<ReviewResponse> reviewAlbum(ReviewPostRequest reviewRequest) throws InvalidOperationException, InvalidInputException {
         validateReview(reviewRequest);
-        User user = authService.getUserFromRequest(request).orElseThrow(() -> new InvalidOperationException("Posting a review failed: user not found"));
+        User user = authService.getUserFromSecurityContextHolder();
         Album album = albumRepository.findById(reviewRequest.albumId()).orElseThrow(() -> new InvalidOperationException("Album not found"));
         Review review = reviewMapper.createReview(user, album, reviewRequest.text(), Timestamp.from(Instant.now()));
         reviewRepository.save(review);
         return ResponseEntity.ok(reviewMapper.reviewToReviewDto(review));
     }
 
-    public ResponseEntity<ReviewResponse> updateReview(HttpServletRequest request, ReviewPostRequest reviewRequest) throws InvalidOperationException{
+    public ResponseEntity<ReviewResponse> updateReview(ReviewPostRequest reviewRequest) throws InvalidOperationException{
         validateReview(reviewRequest);
-        User user = authService.getUserFromRequest(request).orElseThrow(() -> new InvalidOperationException("Updating a review failed: user not found"));
+        User user = authService.getUserFromSecurityContextHolder();
         Album album = albumRepository.findById(reviewRequest.albumId()).orElseThrow(() -> new InvalidOperationException("Updating a review failed: album not found"));
         Review review = reviewRepository.findReviewByAlbumAndUser(album, user).orElseThrow(() -> new InvalidOperationException("Updating review failed: review not found"));
         review.setText(reviewRequest.text());
@@ -66,8 +65,8 @@ public class ReviewService {
         return ResponseEntity.ok(reviewMapper.reviewToReviewDto(review));
     }
 
-    public void deleteReview(HttpServletRequest request, ReviewDeleteRequest deleteRequest) throws InvalidOperationException {
-        User user = authService.getUserFromRequest(request).orElseThrow(() -> new InvalidOperationException("Deleting review failed: user not found"));
+    public void deleteReview(ReviewDeleteRequest deleteRequest) throws InvalidOperationException {
+        User user = authService.getUserFromSecurityContextHolder();
         Album album = albumRepository.findById(deleteRequest.albumId()).orElseThrow(() -> new InvalidOperationException("Deleting review failed: album not found"));
         Review review = reviewRepository.findReviewByAlbumAndUser(album, user).orElseThrow(() -> new InvalidOperationException("Deleting review failed: review not found"));
         reviewRepository.deleteById(review.getId());
@@ -77,8 +76,8 @@ public class ReviewService {
         if (reviewRequest.text().length() > 255) {throw new InvalidInputException("Review is too long");}
     }
 
-    public ResponseEntity<List<MyReviewDto>> getAllUserReviews(HttpServletRequest request) throws UserNotFoundException {
-        User user = authService.getUserFromRequest(request).orElseThrow(() -> new UserNotFoundException("Getting user reviews failed: user not found"));
+    public ResponseEntity<List<MyReviewDto>> getAllUserReviews() throws UserNotFoundException {
+        User user = authService.getUserFromSecurityContextHolder();
         List<Review> reviews = reviewRepository.findReviewsByUser(user);
         return ResponseEntity.ok(reviewMapper.reviewsToUserReviewDtoList(reviews));
     }
@@ -93,8 +92,8 @@ public class ReviewService {
         return ResponseEntity.ok(reviews);
     }
 
-    public ResponseEntity<List<LatestReviewDto>> getFriendsLatestReviews(HttpServletRequest request, Integer page) {
-        User user = authService.getUserFromRequest(request).orElseThrow(() -> new RuntimeException("Fetching friends reviews failed: User making the request not found"));
+    public ResponseEntity<List<LatestReviewDto>> getFriendsLatestReviews(Integer page) {
+        User user = authService.getUserFromSecurityContextHolder();
         List<User> followed = followRepository.findAllByFollowerId(user).stream().map(Follow::getFollowedId).toList();
 
         Sort sort = Sort.by("timestamp").descending();

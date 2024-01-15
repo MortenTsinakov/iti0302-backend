@@ -5,7 +5,6 @@ import ee.taltech.iti0302_veebiarendus_backend.album.dto.likeDto.LikeRequest;
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.likeDto.LikeResponse;
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.likeDto.MyLikeDto;
 import ee.taltech.iti0302_veebiarendus_backend.album.service.LikeService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,18 +27,18 @@ public class LikeController {
     private final LikeService likeService;
 
     @PostMapping
-    public ResponseEntity<LikeResponse> likeAlbum(HttpServletRequest request, @RequestBody LikeRequest likeRequest) {
-        return likeService.likeAlbum(request, likeRequest);
+    public ResponseEntity<LikeResponse> likeAlbum(@RequestBody LikeRequest likeRequest) {
+        return likeService.likeAlbum(likeRequest);
     }
 
     @DeleteMapping
-    public ResponseEntity<LikeResponse> unlikeAlbum(HttpServletRequest request, @RequestBody LikeRequest unlikeRequest) {
-        return likeService.unlikeAlbum(request, unlikeRequest);
+    public ResponseEntity<LikeResponse> unlikeAlbum(@RequestBody LikeRequest unlikeRequest) {
+        return likeService.unlikeAlbum(unlikeRequest);
     }
 
     @GetMapping("/my-likes")
-    public ResponseEntity<List<MyLikeDto>> getAllLikedAlbums(HttpServletRequest request) {
-        return likeService.getAllLikedAlbums(request);
+    public ResponseEntity<List<MyLikeDto>> getAllLikedAlbums() {
+        return likeService.getAllLikedAlbums();
     }
 
     @GetMapping("/users-latest")
@@ -48,7 +47,7 @@ public class LikeController {
     }
 
     @GetMapping("/friends-latest")
-    public ResponseEntity<List<LatestLikeDto>> getFriendsLatestLikes(@RequestParam(name="page") Integer page, HttpServletRequest request) {
-        return likeService.getFriendsLatestLikes(request, page);
+    public ResponseEntity<List<LatestLikeDto>> getFriendsLatestLikes(@RequestParam(name="page") Integer page) {
+        return likeService.getFriendsLatestLikes(page);
     }
 }

@@ -28,7 +28,6 @@ import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.Album
 import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.ApiProcessingException;
 import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.InvalidInputException;
 import ee.taltech.iti0302_veebiarendus_backend.user.entity.User;
-import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -42,7 +41,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -111,7 +109,6 @@ class AlbumServiceTest {
 
     @Test
     void getAlbumInfoFromDatabase() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         String name = "name";
         String artist = "artist";
         User user = new User();
@@ -130,7 +127,7 @@ class AlbumServiceTest {
         ResponseEntity<AlbumInfoDto> expected = ResponseEntity.ok(albumInfoDto);
 
         when(albumRepository.findByNameIgnoreCaseAndArtistIgnoreCase(name, artist)).thenReturn(Optional.of(album));
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(likeRepository.existsByAlbumAndUser(album, user)).thenReturn(albumUserInfoDto.like());
         when(laterListenRepository.existsByAlbumAndUser(album, user)).thenReturn(albumUserInfoDto.listenLater());
         when(ratingRepository.findRatingByAlbumAndUser(album, user)).thenReturn(Optional.of(rating));
@@ -139,10 +136,10 @@ class AlbumServiceTest {
         when(ratingRepository.sumRatingsByAlbum(album)).thenReturn(albumStatsInfoDto.sumOfRatings());
         when(albumInfoMapper.albumToAlbumInfoDto(album, albumUserInfoDto, albumStatsInfoDto)).thenReturn(albumInfoDto);
 
-        ResponseEntity<AlbumInfoDto> result = albumService.getAlbumInfo(request, name, artist);
+        ResponseEntity<AlbumInfoDto> result = albumService.getAlbumInfo(name, artist);
 
         verify(albumRepository).findByNameIgnoreCaseAndArtistIgnoreCase(name, artist);
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(likeRepository).existsByAlbumAndUser(album, user);
         verify(laterListenRepository).existsByAlbumAndUser(album, user);
         verify(ratingRepository).findRatingByAlbumAndUser(album, user);
@@ -157,43 +154,38 @@ class AlbumServiceTest {
 
     @Test
     void getAlbumInfoNameNull() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         String name = null;
         String artist = "artist";
 
-        assertThrows(InvalidInputException.class, () -> albumService.getAlbumInfo(request, name, artist));
+        assertThrows(InvalidInputException.class, () -> albumService.getAlbumInfo(name, artist));
     }
 
     @Test
     void getAlbumInfoArtistNull() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         String name = "name";
         String artist = null;
 
-        assertThrows(InvalidInputException.class, () -> albumService.getAlbumInfo(request, name, artist));
+        assertThrows(InvalidInputException.class, () -> albumService.getAlbumInfo(name, artist));
     }
 
     @Test
     void getAlbumInfoNameBlank() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         String name = "";
         String artist = "artist";
 
-        assertThrows(InvalidInputException.class, () -> albumService.getAlbumInfo(request, name, artist));
+        assertThrows(InvalidInputException.class, () -> albumService.getAlbumInfo(name, artist));
     }
 
     @Test
     void getAlbumInfoArtistBlank() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         String name = "name";
         String artist = "";
 
-        assertThrows(InvalidInputException.class, () -> albumService.getAlbumInfo(request, name, artist));
+        assertThrows(InvalidInputException.class, () -> albumService.getAlbumInfo(name, artist));
     }
 
     @Test
     void getAlbumInfoAlbumInDatabase() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         String name = "name";
         String artist = "artist";
         User user = new User();
@@ -212,7 +204,7 @@ class AlbumServiceTest {
         ResponseEntity<AlbumInfoDto> expected = ResponseEntity.ok(albumInfoDto);
 
         when(albumRepository.findByNameIgnoreCaseAndArtistIgnoreCase(name, artist)).thenReturn(Optional.of(album));
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(likeRepository.existsByAlbumAndUser(album, user)).thenReturn(albumUserInfoDto.like());
         when(laterListenRepository.existsByAlbumAndUser(album, user)).thenReturn(albumUserInfoDto.listenLater());
         when(ratingRepository.findRatingByAlbumAndUser(album, user)).thenReturn(Optional.of(rating));
@@ -221,10 +213,10 @@ class AlbumServiceTest {
         when(ratingRepository.sumRatingsByAlbum(album)).thenReturn(albumStatsInfoDto.sumOfRatings());
         when(albumInfoMapper.albumToAlbumInfoDto(album, albumUserInfoDto, albumStatsInfoDto)).thenReturn(albumInfoDto);
 
-        ResponseEntity<AlbumInfoDto> result = albumService.getAlbumInfo(request, name, artist);
+        ResponseEntity<AlbumInfoDto> result = albumService.getAlbumInfo(name, artist);
 
         verify(albumRepository).findByNameIgnoreCaseAndArtistIgnoreCase(name, artist);
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(likeRepository).existsByAlbumAndUser(album, user);
         verify(laterListenRepository).existsByAlbumAndUser(album, user);
         verify(ratingRepository).findRatingByAlbumAndUser(album, user);
@@ -238,7 +230,6 @@ class AlbumServiceTest {
 
     @Test
     void getAlbumInfoAlbumInDatabaseUserIsNull() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         String name = "name";
         String artist = "artist";
         Album album = new Album();
@@ -261,15 +252,15 @@ class AlbumServiceTest {
         ResponseEntity<AlbumInfoDto> expected = ResponseEntity.ok(albumInfoDto);
 
         when(albumRepository.findByNameIgnoreCaseAndArtistIgnoreCase(name, artist)).thenReturn(Optional.of(album));
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.empty());
+        when(authService.getUserFromSecurityContextHolder()).thenThrow(ClassCastException.class);
         when(ratingRepository.countAllByAlbum(album)).thenReturn(0L);
         when(ratingRepository.sumRatingsByAlbum(album)).thenReturn(0L);
         when(albumInfoMapper.albumToAlbumInfoDto(album, albumUserInfoDto, albumStatsInfoDto)).thenReturn(albumInfoDto);
 
-        ResponseEntity<AlbumInfoDto> result = albumService.getAlbumInfo(request, name, artist);
+        ResponseEntity<AlbumInfoDto> result = albumService.getAlbumInfo(name, artist);
 
         verify(albumRepository).findByNameIgnoreCaseAndArtistIgnoreCase(name, artist);
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(ratingRepository).countAllByAlbum(album);
         verify(ratingRepository).sumRatingsByAlbum(album);
         verify(albumInfoMapper).albumToAlbumInfoDto(album, albumUserInfoDto, albumStatsInfoDto);
@@ -279,7 +270,6 @@ class AlbumServiceTest {
 
     @Test
     void getAlbumInfoAlbumNotInDatabase() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         String name = "name";
         String artist = "artist";
         AlbumInfoResult apiResponse = new AlbumInfoResult(new ApiAlbumInfo("artist", new ArrayList<>(), null, "name"));
@@ -316,10 +306,10 @@ class AlbumServiceTest {
         when(apiHelper.getAlbumFromLastFmResponse(apiResponse)).thenReturn(album);
         when(albumRepository.existsByNameIgnoreCaseAndArtistIgnoreCase(album.getName(), album.getArtist())).thenReturn(false);
         when(apiHelper.getTrackListFromResponse(apiResponse, album)).thenReturn(trackList);
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.empty());
+        when(authService.getUserFromSecurityContextHolder()).thenThrow(ClassCastException.class);
         when(albumInfoMapper.albumToAlbumInfoDto(album, albumUserInfoDto,null)).thenReturn(albumInfoDto);
 
-        ResponseEntity<AlbumInfoDto> result = albumService.getAlbumInfo(request, name, artist);
+        ResponseEntity<AlbumInfoDto> result = albumService.getAlbumInfo(name, artist);
 
         verify(albumRepository).findByNameIgnoreCaseAndArtistIgnoreCase(name, artist);
         verify(apiHelper).getAlbumInfoFromLastFm(name, artist);
@@ -336,7 +326,6 @@ class AlbumServiceTest {
 
     @Test
     void getAlbumInfoAlbumNameIsBlank() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         String name = "name";
         String artist = "artist";
         AlbumInfoResult response = new AlbumInfoResult(new ApiAlbumInfo("artist", new ArrayList<>(), null, "name"));;
@@ -352,7 +341,7 @@ class AlbumServiceTest {
         when(albumRepository.existsByNameIgnoreCaseAndArtistIgnoreCase(album.getName(), album.getArtist())).thenReturn(false);
         when(apiHelper.getTrackListFromResponse(response, album)).thenReturn(trackList);
 
-        assertThrows(ApiProcessingException.class, () -> albumService.getAlbumInfo(request, name, artist));
+        assertThrows(ApiProcessingException.class, () -> albumService.getAlbumInfo(name, artist));
 
         verify(albumRepository).findByNameIgnoreCaseAndArtistIgnoreCase(name, artist);
         verify(apiHelper).getAlbumInfoFromLastFm(name, artist);
@@ -363,7 +352,6 @@ class AlbumServiceTest {
 
     @Test
     void getAlbumInfoArtistIsBlank() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         String name = "name";
         String artist = "artist";
         AlbumInfoResult response = new AlbumInfoResult(new ApiAlbumInfo("artist", new ArrayList<>(), null, "name"));;
@@ -379,7 +367,7 @@ class AlbumServiceTest {
         when(albumRepository.existsByNameIgnoreCaseAndArtistIgnoreCase(album.getName(), album.getArtist())).thenReturn(false);
         when(apiHelper.getTrackListFromResponse(response, album)).thenReturn(trackList);
 
-        assertThrows(ApiProcessingException.class, () -> albumService.getAlbumInfo(request, name, artist));
+        assertThrows(ApiProcessingException.class, () -> albumService.getAlbumInfo(name, artist));
 
         verify(albumRepository).findByNameIgnoreCaseAndArtistIgnoreCase(name, artist);
         verify(apiHelper).getAlbumInfoFromLastFm(name, artist);

@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Repository
 public interface RatingRepository extends JpaRepository<Rating, Long> {
-    Optional<Rating> findRatingByAlbumAndUser(Album album, User user);
+    Optional<Rating> findRatingByAlbumAndUser(Album album, Object user);
     Long countAllByAlbum(Album album);
     @Query(value = "SELECT SUM(r.score) FROM Rating r WHERE r.album= :album")
     Long sumRatingsByAlbum(@Param("album") Album album);

@@ -9,7 +9,6 @@ import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.SignU
 import ee.taltech.iti0302_veebiarendus_backend.auth.mapper.SignUpRequestToUserMapper;
 import ee.taltech.iti0302_veebiarendus_backend.auth.mapper.UserToAuthResponseMapper;
 import ee.taltech.iti0302_veebiarendus_backend.user.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +18,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -80,16 +77,7 @@ public class AuthenticationService {
         return new ResponseEntity<>(new AuthenticationResponse(null, null, null), HttpStatus.OK);
     }
 
-    public Optional<User> getUserFromRequest(HttpServletRequest request) {
-        String header = request.getHeader("Authorization");
-        if (header == null || header.isBlank()) {return Optional.empty();}
-        String jwt = header.substring(7);
-        if (jwt.isBlank()) {return Optional.empty();}
-        String username = jwtService.extractUsername(jwt);
-        if (username != null) {
-            User user = userRepository.findByUsername(username);
-            if (jwtService.isTokenValid(jwt, user)) {return Optional.of(user);}
-        }
-        return Optional.empty();
+    public User getUserFromSecurityContextHolder() {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

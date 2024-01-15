@@ -15,7 +15,6 @@ import ee.taltech.iti0302_veebiarendus_backend.album.entity.Track;
 import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.AlbumNotFoundException;
 import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.ApiProcessingException;
 import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.InvalidInputException;
-import ee.taltech.iti0302_veebiarendus_backend.user.entity.User;
 import ee.taltech.iti0302_veebiarendus_backend.album.mapper.albumMapper.AlbumInfoMapper;
 import ee.taltech.iti0302_veebiarendus_backend.album.mapper.albumMapper.AlbumSearchMapper;
 import ee.taltech.iti0302_veebiarendus_backend.album.repository.AlbumRepository;
@@ -24,7 +23,6 @@ import ee.taltech.iti0302_veebiarendus_backend.album.repository.LikeRepository;
 import ee.taltech.iti0302_veebiarendus_backend.album.repository.RatingRepository;
 import ee.taltech.iti0302_veebiarendus_backend.album.repository.TrackRepository;
 import ee.taltech.iti0302_veebiarendus_backend.album.service.helper.ApiHelper;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -58,23 +56,23 @@ public class AlbumService {
         return ResponseEntity.ok(foundAlbumsDtoList);
     }
 
-    public ResponseEntity<AlbumInfoDto> getAlbumInfo(HttpServletRequest request, String name, String artist) throws AlbumNotFoundException, InvalidInputException, ApiProcessingException {
+    public ResponseEntity<AlbumInfoDto> getAlbumInfo(String name, String artist) throws AlbumNotFoundException, InvalidInputException, ApiProcessingException {
         if (name == null || artist == null || name.isBlank() || artist.isBlank()) {
             throw new InvalidInputException("Bad Request: One of the inputs is missing");
         }
         try {
-            ResponseEntity<AlbumInfoDto> response = getAlbumFromDatabase(request, name, artist);
+            ResponseEntity<AlbumInfoDto> response = getAlbumFromDatabase(name, artist);
             log.debug("Fetched album info from database: {}", name);
             return response;
         } catch (AlbumNotFoundException e) {
             log.debug("Album not found in database, requesting album from Last.fm API: " + name + " by " + artist);
         }
-        ResponseEntity<AlbumInfoDto> response = getAlbumInfoFromLastFm(request, name, artist);
+        ResponseEntity<AlbumInfoDto> response = getAlbumInfoFromLastFm(name, artist);
         log.info("Fetched album from Last.fm API");
         return response;
     }
 
-    private ResponseEntity<AlbumInfoDto> getAlbumInfoFromLastFm(HttpServletRequest request, String name, String artist) throws AlbumNotFoundException, ApiProcessingException {
+    private ResponseEntity<AlbumInfoDto> getAlbumInfoFromLastFm(String name, String artist) throws AlbumNotFoundException, ApiProcessingException {
         AlbumInfoResult lastFmResponse = apiHelper.getAlbumInfoFromLastFm(name, artist);
         Album album = apiHelper.getAlbumFromLastFmResponse(lastFmResponse);
 
@@ -98,7 +96,7 @@ public class AlbumService {
         with a slightly different name.
         */
         if (albumRepository.existsByNameIgnoreCaseAndArtistIgnoreCase(album.getName(), album.getArtist())) {
-            return getAlbumFromDatabase(request, album.getName(), album.getArtist());
+            return getAlbumFromDatabase(album.getName(), album.getArtist());
         }
 
         List<Track> trackList = apiHelper.getTrackListFromResponse(lastFmResponse, album);
@@ -109,29 +107,30 @@ public class AlbumService {
 
         AlbumInfoDto albumDto = albumInfoMapper.albumToAlbumInfoDto(
                 album,
-                getAlbumUserInfo(request, album),
+                getAlbumUserInfo(album),
                 null);
 
         return ResponseEntity.ok(albumDto);
     }
 
-    private ResponseEntity<AlbumInfoDto> getAlbumFromDatabase(HttpServletRequest request, String name, String artist) throws AlbumNotFoundException {
+    private ResponseEntity<AlbumInfoDto> getAlbumFromDatabase(String name, String artist) throws AlbumNotFoundException {
         Album album = albumRepository.findByNameIgnoreCaseAndArtistIgnoreCase(name, artist).orElseThrow(() -> new AlbumNotFoundException("Album not found in database"));
-        AlbumInfoDto albumDto = albumInfoMapper.albumToAlbumInfoDto(album, getAlbumUserInfo(request, album), getAlbumStatsInfo(album));
+        AlbumInfoDto albumDto = albumInfoMapper.albumToAlbumInfoDto(album, getAlbumUserInfo(album), getAlbumStatsInfo(album));
         return ResponseEntity.ok(albumDto);
     }
 
-    private AlbumUserInfoDto getAlbumUserInfo(HttpServletRequest request, Album album) {
-        User user = authService.getUserFromRequest(request).orElse(null);
-        if (user != null) {
+    private AlbumUserInfoDto getAlbumUserInfo(Album album) {
+        try {
+            Object user = authService.getUserFromSecurityContextHolder();
             return new AlbumUserInfoDto(
                     likeRepository.existsByAlbumAndUser(album, user),
                     laterListenRepository.existsByAlbumAndUser(album, user),
                     ratingRepository.findRatingByAlbumAndUser(album, user).map(Rating::getScore).orElse(0),
                     reviewRepository.findReviewByAlbumAndUser(album, user).map(Review::getText).orElse(null)
             );
+        } catch (ClassCastException e) {
+            return new AlbumUserInfoDto(false, false, 0, null);
         }
-        return new AlbumUserInfoDto(false, false, 0, null);
     }
 
     private AlbumStatsInfoDto getAlbumStatsInfo(Album album) {

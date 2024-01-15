@@ -1,29 +1,29 @@
 ###
 POST http://localhost:8080/api/like
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlcnQiLCJpYXQiOjE3MDIwNDA0NTgsImV4cCI6MTcwMjY0NTI1OH0.5JlFNQKKj6WYA69FVAjr-RAC-VAD8bkWMImLcg0L6z8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTcwNTMyNDAxNSwiZXhwIjoxNzA1OTI4ODE1fQ.-OjpDtBTDD6lW7mKXidxzNUJ1LEoemqxSkyyv5Gi0Gg
 Content-Type: application/json
 
 {
-  "albumId": 3
+  "albumId": 1
 }
 
 ###
 DELETE http://localhost:8080/api/like
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNSIsImlhdCI6MTcwMTQzMzM5NiwiZXhwIjoxNzAyMDM4MTk2fQ.X0nMfZ6x7nqMnL8FPUdTF28ai7QxSwYm6KhJhpPysNo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcwNTMyMzkyNywiZXhwIjoxNzA1OTI4NzI3fQ.fRbCPJGi7rNCM1LaS9PuYq12nrSdWISrtOLeTzzsS8I
 Content-Type: application/json
 
 {
-  "albumId": 3
+  "albumId": 1
 }
 
 ###
 GET http://localhost:8080/api/like/my-likes
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlcnQiLCJpYXQiOjE3MDIwNDA0NTgsImV4cCI6MTcwMjY0NTI1OH0.5JlFNQKKj6WYA69FVAjr-RAC-VAD8bkWMImLcg0L6z8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcwNTMyMzkyNywiZXhwIjoxNzA1OTI4NzI3fQ.fRbCPJGi7rNCM1LaS9PuYq12nrSdWISrtOLeTzzsS8I
 
 ###
-GET http://localhost:8080/api/like/users-latest?user=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNyIsImlhdCI6MTcwMTI2MTA2MiwiZXhwIjoxNzAxODY1ODYyfQ.fSv3UvYXstdgSR1XjeuMFZhawcJ6vbuT8cYF0wSBCmw
+GET http://localhost:8080/api/like/users-latest?user=3
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcwNTMyMzkyNywiZXhwIjoxNzA1OTI4NzI3fQ.fRbCPJGi7rNCM1LaS9PuYq12nrSdWISrtOLeTzzsS8I
 
 ###
-GET http://localhost:8080/api/like/friends-latest?page=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTcwMTc3NzM5NCwiZXhwIjoxNzAyMzgyMTk0fQ.LFFfnKgAjHNshGXcW_-smTCtwLPJjxUJ2aHO4uvKMQA
+GET http://localhost:8080/api/like/friends-latest?page=0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcwNTMyMzkyNywiZXhwIjoxNzA1OTI4NzI3fQ.fRbCPJGi7rNCM1LaS9PuYq12nrSdWISrtOLeTzzsS8I

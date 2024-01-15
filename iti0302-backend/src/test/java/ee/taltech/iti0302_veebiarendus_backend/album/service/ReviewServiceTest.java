@@ -21,7 +21,6 @@ import ee.taltech.iti0302_veebiarendus_backend.user.entity.Follow;
 import ee.taltech.iti0302_veebiarendus_backend.user.entity.User;
 import ee.taltech.iti0302_veebiarendus_backend.user.repository.FollowRepository;
 import ee.taltech.iti0302_veebiarendus_backend.user.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -43,7 +42,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -68,7 +66,6 @@ class ReviewServiceTest {
 
     @Test
     void reviewAlbum() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         ReviewPostRequest reviewPostRequest = new ReviewPostRequest(1L, "text");
         User user = new User();
         user.setId(1);
@@ -80,14 +77,14 @@ class ReviewServiceTest {
 
         ResponseEntity<ReviewResponse> expected = ResponseEntity.ok(response);
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(reviewPostRequest.albumId())).thenReturn(Optional.of(album));
         when(reviewMapper.createReview(eq(user), eq(album), eq(reviewPostRequest.text()), any(Timestamp.class))).thenReturn(review);
         when(reviewMapper.reviewToReviewDto(review)).thenReturn(response);
 
-        ResponseEntity<ReviewResponse> actual = reviewService.reviewAlbum(request, reviewPostRequest);
+        ResponseEntity<ReviewResponse> actual = reviewService.reviewAlbum(reviewPostRequest);
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(reviewPostRequest.albumId());
         verify(reviewMapper).createReview(eq(user), eq(album), eq(reviewPostRequest.text()), any(Timestamp.class));
         verify(reviewRepository).save(review);
@@ -97,44 +94,30 @@ class ReviewServiceTest {
     }
 
     @Test
-    void reviewAlbumUserNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        ReviewPostRequest reviewPostRequest = new ReviewPostRequest(1L, "text");
-
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.empty());
-
-        assertThrows(InvalidOperationException.class, () -> reviewService.reviewAlbum(request, reviewPostRequest));
-        verify(authService).getUserFromRequest(request);
-    }
-
-    @Test
     void reviewAlbumAlbumNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         ReviewPostRequest reviewPostRequest = new ReviewPostRequest(1L, "text");
         User user = new User();
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(reviewPostRequest.albumId())).thenReturn(Optional.empty());
 
-        assertThrows(InvalidOperationException.class, () -> reviewService.reviewAlbum(request, reviewPostRequest));
-        verify(authService).getUserFromRequest(request);
+        assertThrows(InvalidOperationException.class, () -> reviewService.reviewAlbum(reviewPostRequest));
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(reviewPostRequest.albumId());
     }
 
     @Test
     void reviewAlbumReviewLongerThanAllowed() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         String text = new Random().ints(256, 33, 126)
                 .mapToObj(i -> String.valueOf((char) i))
                 .collect(Collectors.joining());
         ReviewPostRequest reviewPostRequest = new ReviewPostRequest(1L, text);
 
-        assertThrows(InvalidInputException.class, () -> reviewService.reviewAlbum(request, reviewPostRequest));
+        assertThrows(InvalidInputException.class, () -> reviewService.reviewAlbum(reviewPostRequest));
     }
 
     @Test
     void updateReview() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         ReviewPostRequest reviewPostRequest = new ReviewPostRequest(1L, "text");
         User user = new User();
         user.setId(1);
@@ -148,14 +131,14 @@ class ReviewServiceTest {
 
         ResponseEntity<ReviewResponse> expected = ResponseEntity.ok(response);
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(reviewPostRequest.albumId())).thenReturn(Optional.of(album));
         when(reviewRepository.findReviewByAlbumAndUser(album, user)).thenReturn(Optional.of(reviewInitial));
         when(reviewMapper.reviewToReviewDto(any())).thenReturn(response);
 
-        ResponseEntity<ReviewResponse> actual = reviewService.updateReview(request, reviewPostRequest);
+        ResponseEntity<ReviewResponse> actual = reviewService.updateReview(reviewPostRequest);
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(reviewPostRequest.albumId());
         verify(reviewRepository).save(argThat(r -> r.getText().equals(reviewPostRequest.text())));
         verify(reviewMapper).reviewToReviewDto(reviewInitial);
@@ -164,124 +147,95 @@ class ReviewServiceTest {
     }
 
     @Test
-    void updateReviewUserNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        ReviewPostRequest reviewPostRequest = new ReviewPostRequest(1L, "text");
-
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.empty());
-
-        assertThrows(InvalidOperationException.class, () -> reviewService.updateReview(request, reviewPostRequest));
-        verify(authService).getUserFromRequest(request);
-    }
-
-    @Test
     void updateReviewAlbumNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         ReviewPostRequest reviewPostRequest = new ReviewPostRequest(1L, "text");
         User user =  new User();
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(reviewPostRequest.albumId())).thenReturn(Optional.empty());
 
-        assertThrows(InvalidOperationException.class, () -> reviewService.updateReview(request, reviewPostRequest));
-        verify(authService).getUserFromRequest(request);
+        assertThrows(InvalidOperationException.class, () -> reviewService.updateReview(reviewPostRequest));
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(reviewPostRequest.albumId());
     }
 
     @Test
     void updateReviewReviewNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         ReviewPostRequest reviewPostRequest = new ReviewPostRequest(1L, "text");
         User user =  new User();
         Album album = new Album();
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(reviewPostRequest.albumId())).thenReturn(Optional.of(album));
         when(reviewRepository.findReviewByAlbumAndUser(album, user)).thenReturn(Optional.empty());
 
-        assertThrows(InvalidOperationException.class, () -> reviewService.updateReview(request, reviewPostRequest));
-        verify(authService).getUserFromRequest(request);
+        assertThrows(InvalidOperationException.class, () -> reviewService.updateReview(reviewPostRequest));
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(reviewPostRequest.albumId());
         verify(reviewRepository).findReviewByAlbumAndUser(album, user);
     }
 
     @Test
     void updateReviewReviewLongerThanAllowed() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         String text = new Random().ints(256, 33, 126)
                 .mapToObj(i -> String.valueOf((char) i))
                 .collect(Collectors.joining());
         ReviewPostRequest reviewPostRequest = new ReviewPostRequest(1L, text);
 
-        assertThrows(InvalidInputException.class, () -> reviewService.updateReview(request, reviewPostRequest));
+        assertThrows(InvalidInputException.class, () -> reviewService.updateReview(reviewPostRequest));
     }
 
     @Test
     void deleteReview() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         ReviewDeleteRequest deleteRequest = new ReviewDeleteRequest(1L);
         User user = new User();
         Album album = new Album();
         Review review = new Review();
         review.setId(1L);
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(deleteRequest.albumId())).thenReturn(Optional.of(album));
         when(reviewRepository.findReviewByAlbumAndUser(album, user)).thenReturn(Optional.of(review));
 
-        reviewService.deleteReview(request, deleteRequest);
+        reviewService.deleteReview(deleteRequest);
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(deleteRequest.albumId());
         verify(reviewRepository).findReviewByAlbumAndUser(album, user);
         verify(reviewRepository).deleteById(review.getId());
     }
 
     @Test
-    void deleteReviewUserNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        ReviewDeleteRequest deleteRequest = new ReviewDeleteRequest(1L);
-
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.empty());
-
-        assertThrows(InvalidOperationException.class, () -> reviewService.deleteReview(request, deleteRequest));
-        verify(authService).getUserFromRequest(request);
-    }
-
-    @Test
     void deleteReviewAlbumNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         ReviewDeleteRequest deleteRequest = new ReviewDeleteRequest(1L);
         User user = new User();
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(deleteRequest.albumId())).thenReturn(Optional.empty());
 
-        assertThrows(InvalidOperationException.class, () -> reviewService.deleteReview(request, deleteRequest));
-        verify(authService).getUserFromRequest(request);
+        assertThrows(InvalidOperationException.class, () -> reviewService.deleteReview(deleteRequest));
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(deleteRequest.albumId());
     }
 
     @Test
     void deleteReviewReviewNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         ReviewDeleteRequest deleteRequest = new ReviewDeleteRequest(1L);
         User user = new User();
         Album album = new Album();
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(deleteRequest.albumId())).thenReturn(Optional.of(album));
         when(reviewRepository.findReviewByAlbumAndUser(album, user)).thenReturn(Optional.empty());
 
-        assertThrows(InvalidOperationException.class, () -> reviewService.deleteReview(request, deleteRequest));
-        verify(authService).getUserFromRequest(request);
+        assertThrows(InvalidOperationException.class, () -> reviewService.deleteReview(deleteRequest));
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(deleteRequest.albumId());
         verify(reviewRepository).findReviewByAlbumAndUser(album, user);
     }
 
     @Test
     void getAllUserReviews() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         User user = new User();
         List<Review> reviewList = List.of(
             new Review()
@@ -292,27 +246,17 @@ class ReviewServiceTest {
 
         ResponseEntity<List<MyReviewDto>> expected = ResponseEntity.ok(userReviews);
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(reviewRepository.findReviewsByUser(user)).thenReturn(reviewList);
         when(reviewMapper.reviewsToUserReviewDtoList(reviewList)).thenReturn(userReviews);
 
-        ResponseEntity<List<MyReviewDto>> actual = reviewService.getAllUserReviews(request);
+        ResponseEntity<List<MyReviewDto>> actual = reviewService.getAllUserReviews();
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(reviewRepository).findReviewsByUser(user);
         verify(reviewMapper).reviewsToUserReviewDtoList(reviewList);
 
         assertEquals(expected, actual);
-    }
-
-    @Test
-    void getAllUserReviewsUserNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.empty());
-
-        assertThrows(UserNotFoundException.class, () -> reviewService.getAllUserReviews(request));
-        verify(authService).getUserFromRequest(request);
     }
 
     @Test
@@ -365,7 +309,6 @@ class ReviewServiceTest {
 
     @Test
     void getFriendsLatestReviews() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         User user = new User();
         User followed = new User();
         Follow follow = new Follow();
@@ -397,15 +340,15 @@ class ReviewServiceTest {
 
         Page<Review> reviewPage = new PageImpl<>(reviews);
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(followRepository.findAllByFollowerId(user)).thenReturn(List.of(follow));
         when(reviewRepository.findAllByUserIn(eq(followedList), any(Pageable.class))).thenReturn(reviewPage);
         when(reviewMapper.reviewsToLatestReviewDtoList(reviewPage.getContent())).thenReturn(reviewDtoList);
 
         ResponseEntity<List<LatestReviewDto>> expected = ResponseEntity.ok(reviewDtoList);
-        ResponseEntity<List<LatestReviewDto>> actual = reviewService.getFriendsLatestReviews(request, 0);
+        ResponseEntity<List<LatestReviewDto>> actual = reviewService.getFriendsLatestReviews(0);
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(followRepository).findAllByFollowerId(user);
         verify(reviewRepository).findAllByUserIn(eq(followedList), any(Pageable.class));
         verify(reviewMapper).reviewsToLatestReviewDtoList(reviewPage.getContent());
@@ -415,8 +358,7 @@ class ReviewServiceTest {
 
     @Test
     void getFriendsReviewsUserNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.empty());
-        assertThrows(RuntimeException.class, () -> reviewService.getFriendsLatestReviews(request, 0));
+        when(authService.getUserFromSecurityContextHolder()).thenThrow(ClassCastException.class);
+        assertThrows(RuntimeException.class, () -> reviewService.getFriendsLatestReviews(0));
     }
 }

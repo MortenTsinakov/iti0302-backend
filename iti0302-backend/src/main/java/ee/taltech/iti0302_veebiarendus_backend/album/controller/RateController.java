@@ -4,7 +4,6 @@ import ee.taltech.iti0302_veebiarendus_backend.album.dto.ratingDto.RatingRequest
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.ratingDto.RatingResponse;
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.ratingDto.LatestRatingDto;
 import ee.taltech.iti0302_veebiarendus_backend.album.service.RateService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,13 +26,13 @@ public class RateController {
     private final RateService rateService;
 
     @PostMapping
-    public ResponseEntity<RatingResponse> rateAlbum(HttpServletRequest request, @RequestBody RatingRequest ratingRequest) {
-        return rateService.rateAlbum(request, ratingRequest);
+    public ResponseEntity<RatingResponse> rateAlbum(@RequestBody RatingRequest ratingRequest) {
+        return rateService.rateAlbum(ratingRequest);
     }
 
     @PutMapping
-    public ResponseEntity<RatingResponse> updateAlbumRating(HttpServletRequest request, @RequestBody RatingRequest ratingRequest) {
-        return rateService.updateAlbumRating(request, ratingRequest);
+    public ResponseEntity<RatingResponse> updateAlbumRating(@RequestBody RatingRequest ratingRequest) {
+        return rateService.updateAlbumRating(ratingRequest);
     }
 
     @GetMapping("/users-latest")
@@ -42,7 +41,7 @@ public class RateController {
     }
 
     @GetMapping("/friends-latest")
-    public ResponseEntity<List<LatestRatingDto>> getFriendsRatings(@RequestParam(name="page") Integer page, HttpServletRequest request) {
-        return rateService.getFriendsLatestRatings(request, page);
+    public ResponseEntity<List<LatestRatingDto>> getFriendsRatings(@RequestParam(name="page") Integer page) {
+        return rateService.getFriendsLatestRatings(page);
     }
 }

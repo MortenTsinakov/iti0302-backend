@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Repository
 public interface LikeRepository extends JpaRepository<Like, Long> {
-    boolean existsByAlbumAndUser(Album album, User user);
+    boolean existsByAlbumAndUser(Album album, Object user);
     Optional<Like> findByAlbumAndUser(Album album, User user);
     List<Like> findLikesByUser(User user);
     Page<Like> findLikesByUserIn(List<User> users, Pageable page);

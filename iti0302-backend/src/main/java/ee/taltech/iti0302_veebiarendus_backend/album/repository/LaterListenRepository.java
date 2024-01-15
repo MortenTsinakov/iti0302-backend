@@ -13,5 +13,5 @@ import java.util.Optional;
 public interface LaterListenRepository extends JpaRepository<LaterListen, Long> {
     Optional<LaterListen> findLaterListenByAlbumAndUser(Album album, User user);
     List<LaterListen> findLaterListenByUser(User user);
-    boolean existsByAlbumAndUser(Album album, User user);
+    boolean existsByAlbumAndUser(Album album, Object user);
 }

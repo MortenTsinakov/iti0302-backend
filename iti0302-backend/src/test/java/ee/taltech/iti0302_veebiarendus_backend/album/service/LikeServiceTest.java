@@ -18,7 +18,6 @@ import ee.taltech.iti0302_veebiarendus_backend.user.entity.Follow;
 import ee.taltech.iti0302_veebiarendus_backend.user.entity.User;
 import ee.taltech.iti0302_veebiarendus_backend.user.repository.FollowRepository;
 import ee.taltech.iti0302_veebiarendus_backend.user.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -63,7 +62,6 @@ class LikeServiceTest {
 
     @Test
     void likeAlbum() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         LikeRequest likeRequest = new LikeRequest(1L);
         User user = new User();
         Album album = new Album();
@@ -74,13 +72,13 @@ class LikeServiceTest {
 
         ResponseEntity<LikeResponse> expected = ResponseEntity.ok(likeResponse);
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(likeRequest.albumId())).thenReturn(Optional.of(album));
         when(likeMapper.createLike(eq(user), eq(album), any(Timestamp.class))).thenReturn(like);
 
-        ResponseEntity<LikeResponse> result = likeService.likeAlbum(request, likeRequest);
+        ResponseEntity<LikeResponse> result = likeService.likeAlbum(likeRequest);
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(likeRequest.albumId());
         verify(likeMapper).createLike(eq(user), eq(album), any(Timestamp.class));
         verify(likeRepository).save(argThat(l -> l.getAlbum() == album && l.getUser() == user));
@@ -90,31 +88,28 @@ class LikeServiceTest {
 
     @Test
     void likeAlbumUserNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         LikeRequest likeRequest = new LikeRequest(1L);
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.empty());
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(null);
 
-        assertThrows(InvalidOperationException.class, () -> likeService.likeAlbum(request, likeRequest));
-        verify(authService).getUserFromRequest(request);
+        assertThrows(InvalidOperationException.class, () -> likeService.likeAlbum(likeRequest));
+        verify(authService).getUserFromSecurityContextHolder();
     }
 
     @Test
     void likeAlbumAlbumNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         LikeRequest likeRequest = new LikeRequest(1L);
         User user = new User();
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
 
-        assertThrows(InvalidOperationException.class, () -> likeService.likeAlbum(request, likeRequest));
-        verify(authService).getUserFromRequest(request);
+        assertThrows(InvalidOperationException.class, () -> likeService.likeAlbum(likeRequest));
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(likeRequest.albumId());
     }
 
     @Test
     void unlikeAlbum() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         LikeRequest likeRequest = new LikeRequest(1L);
         User user = new User();
         user.setId(1);
@@ -127,13 +122,13 @@ class LikeServiceTest {
 
         ResponseEntity<LikeResponse> expected = ResponseEntity.ok(new LikeResponse(false));
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(likeRequest.albumId())).thenReturn(Optional.of(album));
         when(likeRepository.findByAlbumAndUser(album, user)).thenReturn(Optional.of(like));
 
-        ResponseEntity<LikeResponse> result = likeService.unlikeAlbum(request, likeRequest);
+        ResponseEntity<LikeResponse> result = likeService.unlikeAlbum(likeRequest);
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(likeRequest.albumId());
         verify(likeRepository).findByAlbumAndUser(album, user);
         verify(likeRepository).deleteById(like.getId());
@@ -143,49 +138,45 @@ class LikeServiceTest {
 
     @Test
     void unlikeAlbumUserNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         LikeRequest likeRequest = new LikeRequest(1L);
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.empty());
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(null);
 
-        assertThrows(InvalidOperationException.class, () -> likeService.unlikeAlbum(request, likeRequest));
-        verify(authService).getUserFromRequest(request);
+        assertThrows(InvalidOperationException.class, () -> likeService.unlikeAlbum(likeRequest));
+        verify(authService).getUserFromSecurityContextHolder();
     }
 
     @Test
     void unlikeAlbumAlbumNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         LikeRequest likeRequest = new LikeRequest(1L);
         User user = new User();
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(likeRequest.albumId())).thenReturn(Optional.empty());
 
-        assertThrows(InvalidOperationException.class, () -> likeService.unlikeAlbum(request, likeRequest));
-        verify(authService).getUserFromRequest(request);
+        assertThrows(InvalidOperationException.class, () -> likeService.unlikeAlbum(likeRequest));
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(likeRequest.albumId());
     }
 
     @Test
     void unlikeAlbumNotPreviouslyLiked() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         LikeRequest likeRequest = new LikeRequest(1L);
         User user = new User();
         Album album = new Album();
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(albumRepository.findById(likeRequest.albumId())).thenReturn(Optional.of(album));
         when(likeRepository.findByAlbumAndUser(album, user)).thenReturn(Optional.empty());
 
-        assertThrows(InvalidOperationException.class, () -> likeService.unlikeAlbum(request, likeRequest));
-        verify(authService).getUserFromRequest(request);
+        assertThrows(InvalidOperationException.class, () -> likeService.unlikeAlbum(likeRequest));
+        verify(authService).getUserFromSecurityContextHolder();
         verify(albumRepository).findById(likeRequest.albumId());
         verify(likeRepository).findByAlbumAndUser(album, user);
     }
 
     @Test
     void getAllLikedAlbums() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         User user = new User();
         Album album = new Album();
         Like like = new Like();
@@ -197,27 +188,17 @@ class LikeServiceTest {
 
         ResponseEntity<List<MyLikeDto>> expected = ResponseEntity.ok(albumDtoList);
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(likeRepository.findLikesByUser(user)).thenReturn(userLikes);
         when(likeMapper.albumListToMyLikeDtoList(albumList)).thenReturn(albumDtoList);
 
-        ResponseEntity<List<MyLikeDto>> result = likeService.getAllLikedAlbums(request);
+        ResponseEntity<List<MyLikeDto>> result = likeService.getAllLikedAlbums();
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(likeRepository).findLikesByUser(user);
         verify(likeMapper).albumListToMyLikeDtoList(albumList);
 
         assertEquals(expected, result);
-    }
-
-    @Test
-    void getAllLIkedAlbumsUserNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.empty());
-
-        assertThrows(UserNotFoundException.class, () -> likeService.getAllLikedAlbums(request));
-        verify(authService).getUserFromRequest(request);
     }
 
     @Test
@@ -275,7 +256,6 @@ class LikeServiceTest {
 
     @Test
     void getFriendsLatestLikes() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
         User user = new User();
         User followed = new User();
         Follow follow = new Follow();
@@ -307,15 +287,15 @@ class LikeServiceTest {
 
         Page<Like> likesPage = new PageImpl<>(likes);
 
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.of(user));
+        when(authService.getUserFromSecurityContextHolder()).thenReturn(user);
         when(followRepository.findAllByFollowerId(user)).thenReturn(List.of(follow));
         when(likeRepository.findLikesByUserIn(eq(followedList), any(Pageable.class))).thenReturn(likesPage);
         when(likeMapper.likeListToLatestLikeDtoList(likesPage.getContent())).thenReturn(likesDtoList);
 
         ResponseEntity<List<LatestLikeDto>> expected = ResponseEntity.ok(likesDtoList);
-        ResponseEntity<List<LatestLikeDto>> actual = likeService.getFriendsLatestLikes(request, 0);
+        ResponseEntity<List<LatestLikeDto>> actual = likeService.getFriendsLatestLikes(0);
 
-        verify(authService).getUserFromRequest(request);
+        verify(authService).getUserFromSecurityContextHolder();
         verify(followRepository).findAllByFollowerId(user);
         verify(likeRepository).findLikesByUserIn(eq(followedList), any(Pageable.class));
         verify(likeMapper).likeListToLatestLikeDtoList(likesPage.getContent());
@@ -325,9 +305,8 @@ class LikeServiceTest {
 
     @Test
     void getFriendsLatestLikesUserNotFound() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        when(authService.getUserFromRequest(request)).thenReturn(Optional.empty());
+        when(authService.getUserFromSecurityContextHolder()).thenThrow(ClassCastException.class);
 
-        assertThrows(RuntimeException.class, () -> likeService.getFriendsLatestLikes(request, 0));
+        assertThrows(RuntimeException.class, () -> likeService.getFriendsLatestLikes(0));
     }
 }

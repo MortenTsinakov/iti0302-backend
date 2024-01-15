@@ -1,89 +1,74 @@
 ###
-GET http://localhost:8080/api/user/100
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcwMDIzMzI0NCwiZXhwIjoxNzAwODM4MDQ0fQ.XpCqXGMTBCrO436FzooFIFduJPx0_o-I1YHAfkLzXUM
-
-###
-GET http://localhost:8080/api/user
-
-###
-DELETE http://localhost:8080/api/user/18
-
-###
-GET http://localhost:8080/api/user/search?user=user3
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTcwMTA4MzQ3OCwiZXhwIjoxNzAxNjg4Mjc4fQ.saLNGXNiHKKNbXxcE0PlyVJ1P4ftyJoWsSZE0gJdJ1E
+GET http://localhost:8080/api/user/search?user=user1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcwNTMyMzM1OCwiZXhwIjoxNzA1OTI4MTU4fQ.6-IK4NAPu706bdKqnkqDj_iEF-c0Aw2AaqrWmZgMi1Q
 
 ###
 POST http://localhost:8080/api/user/follow
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlcnQiLCJpYXQiOjE3MDIwNDA0NTgsImV4cCI6MTcwMjY0NTI1OH0.5JlFNQKKj6WYA69FVAjr-RAC-VAD8bkWMImLcg0L6z8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcwNTMyMzkyNywiZXhwIjoxNzA1OTI4NzI3fQ.fRbCPJGi7rNCM1LaS9PuYq12nrSdWISrtOLeTzzsS8I
 Content-Type: application/json
 
 {
-  "userFollowedId": 7
+  "userFollowedId": 3
 }
 
 ###
 DELETE http://localhost:8080/api/user/unfollow
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyNyIsImlhdCI6MTcwMTI2NDU4NCwiZXhwIjoxNzAxODY5Mzg0fQ.tf9n3kkLaXgQWy4-ChImFJs5AW6EyT-9t-Y2ZS5FJyw
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTcwNTMyMzY0NSwiZXhwIjoxNzA1OTI4NDQ1fQ.cnvLtWFSNFW3_ElVm1dKlRmIiURHauNb5QyakLmWZYY
 Content-Type: application/json
 
 {
-  "userFollowedId": 7
+  "userFollowedId": 1
 }
 
 ###
 GET http://localhost:8080/api/user/followers-stats
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTcwMjA1NTk2MiwiZXhwIjoxNzAyNjYwNzYyfQ.yHtRVW3n0ggYcFtTEfyD1G140VOFWpJD_0VyZdt-Xsw
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTcwNTMyMzY0NSwiZXhwIjoxNzA1OTI4NDQ1fQ.cnvLtWFSNFW3_ElVm1dKlRmIiURHauNb5QyakLmWZYY
 
 ###
 GET http://localhost:8080/api/user/followers?page=0
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbGJlcnQiLCJpYXQiOjE3MDIxMzEwNTEsImV4cCI6MTcwMjczNTg1MX0.-MLk9RwOpI9CELFanPbGK2civ_uvdkCCDMlg1jh18nI
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTcwNTMyMzY0NSwiZXhwIjoxNzA1OTI4NDQ1fQ.cnvLtWFSNFW3_ElVm1dKlRmIiURHauNb5QyakLmWZYY
 
 ###
 GET http://localhost:8080/api/user/following?page=0
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbGJlcnQiLCJpYXQiOjE3MDIxMzEwNTEsImV4cCI6MTcwMjczNTg1MX0.-MLk9RwOpI9CELFanPbGK2civ_uvdkCCDMlg1jh18nI
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTcwNTMyMzY0NSwiZXhwIjoxNzA1OTI4NDQ1fQ.cnvLtWFSNFW3_ElVm1dKlRmIiURHauNb5QyakLmWZYY
 
 ###
-GET http://localhost:8080/api/user/profile?user=17
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlcnQiLCJpYXQiOjE3MDIwMzgzODksImV4cCI6MTcwMjY0MzE4OX0.tLWHU83EaaRqQtQYTpMbhSEM8u5FQm_ScfgS0I7jg4k
-
-
-###
-GET http://localhost:8080/api/user/friends
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlcnQiLCJpYXQiOjE3MDIwNDExMDcsImV4cCI6MTcwMjY0NTkwN30.eDnbI1aI5YiP8RnNvRLh7xL5paEiQlLJKDqKPIMbTH8
+GET http://localhost:8080/api/user/profile?user=1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTcwNTMyMzY0NSwiZXhwIjoxNzA1OTI4NDQ1fQ.cnvLtWFSNFW3_ElVm1dKlRmIiURHauNb5QyakLmWZYY
 
 ###
 PUT http://localhost:8080/api/user/username
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMTgiLCJpYXQiOjE3MDIwMzc5OTUsImV4cCI6MTcwMjY0Mjc5NX0.w9EScid1JaVR7V9b4-r6SCEJfDJWA5WizjMczRfvt1I
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTcwNTMyMzY0NSwiZXhwIjoxNzA1OTI4NDQ1fQ.cnvLtWFSNFW3_ElVm1dKlRmIiURHauNb5QyakLmWZYY
 Content-Type: application/json
 
 {
-  "newUsername": "robert"
+  "newUsername": "Albert"
 }
 
 ###
 PUT http://localhost:8080/api/user/email
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlcnQiLCJpYXQiOjE3MDIwMzk2NDgsImV4cCI6MTcwMjY0NDQ0OH0.ojadUI_IqNo-k4Abui0EDilGwVEESEzZ_FfYjbQUu1A
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbGJlcnQiLCJpYXQiOjE3MDUzMjM4NDUsImV4cCI6MTcwNTkyODY0NX0.Z11ID8g4Q0ggJEE4OFOfBbOvWlcT3BUx0oKywxQ-tXU
 Content-Type: application/json
 
 {
-  "newEmail": "robert@email.com"
+  "newEmail": "albert@email.com"
 }
 
 ###
 PUT http://localhost:8080/api/user/password
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlcnQiLCJpYXQiOjE3MDIwNDAyOTYsImV4cCI6MTcwMjY0NTA5Nn0.vz0PJz5hihsVTnf3gYwQ2fWLf8Z_uvAXnw9QbRq8jy0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbGJlcnQiLCJpYXQiOjE3MDUzMjM4NDUsImV4cCI6MTcwNTkyODY0NX0.Z11ID8g4Q0ggJEE4OFOfBbOvWlcT3BUx0oKywxQ-tXU
 Content-Type: application/json
 
 {
   "currentPassword": "password",
-  "newPassword": "passwordofrobert"
+  "newPassword": "passwordForAlbert"
 }
 
 ###
 DELETE http://localhost:8080/api/user/delete
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlcnQiLCJpYXQiOjE3MDIwNDExMDcsImV4cCI6MTcwMjY0NTkwN30.eDnbI1aI5YiP8RnNvRLh7xL5paEiQlLJKDqKPIMbTH8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbGJlcnQiLCJpYXQiOjE3MDUzMjM4NDUsImV4cCI6MTcwNTkyODY0NX0.Z11ID8g4Q0ggJEE4OFOfBbOvWlcT3BUx0oKywxQ-tXU
 Content-Type: application/json
 
 {
-  "password": "passwordofrobert"
+  "password": "passwordForAlbert"
 }

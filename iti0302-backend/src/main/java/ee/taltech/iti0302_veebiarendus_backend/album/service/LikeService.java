@@ -17,7 +17,6 @@ import ee.taltech.iti0302_veebiarendus_backend.user.entity.Follow;
 import ee.taltech.iti0302_veebiarendus_backend.user.entity.User;
 import ee.taltech.iti0302_veebiarendus_backend.user.repository.FollowRepository;
 import ee.taltech.iti0302_veebiarendus_backend.user.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -44,24 +43,24 @@ public class LikeService {
     private final FollowRepository followRepository;
     private final LikeMapper likeMapper;
 
-    public ResponseEntity<LikeResponse> likeAlbum(HttpServletRequest request, LikeRequest likeRequest) throws InvalidOperationException {
-        User user = authService.getUserFromRequest(request).orElseThrow(() -> new InvalidOperationException("Liking album failed: user not found"));
+    public ResponseEntity<LikeResponse> likeAlbum(LikeRequest likeRequest) throws InvalidOperationException {
+        User user = authService.getUserFromSecurityContextHolder();
         Album album = albumRepository.findById(likeRequest.albumId()).orElseThrow(() -> new InvalidOperationException("Liking album failed: album not found"));
         Like like = likeMapper.createLike(user, album, Timestamp.from(Instant.now()));
         likeRepository.save(like);
         return ResponseEntity.ok(new LikeResponse(true));
     }
 
-    public ResponseEntity<LikeResponse> unlikeAlbum(HttpServletRequest request, LikeRequest unlikeRequest) throws InvalidOperationException{
-        User user = authService.getUserFromRequest(request).orElseThrow(() -> new InvalidOperationException("Unliking album failed: user not found"));
+    public ResponseEntity<LikeResponse> unlikeAlbum(LikeRequest unlikeRequest) throws InvalidOperationException{
+        User user = authService.getUserFromSecurityContextHolder();
         Album album = albumRepository.findById(unlikeRequest.albumId()).orElseThrow(() -> new InvalidOperationException("Unliking album failed: album not found"));
         Like like = likeRepository.findByAlbumAndUser(album, user).orElseThrow(() -> new InvalidOperationException("Unliking album failed: album is not liked"));
         likeRepository.deleteById(like.getId());
         return ResponseEntity.ok(new LikeResponse(false));
     }
 
-    public ResponseEntity<List<MyLikeDto>> getAllLikedAlbums(HttpServletRequest request) {
-        User user = authService.getUserFromRequest(request).orElseThrow(() -> new UserNotFoundException("Fetching liked albums failed: user not found"));
+    public ResponseEntity<List<MyLikeDto>> getAllLikedAlbums() {
+        User user = authService.getUserFromSecurityContextHolder();
         List<Like> likes = likeRepository.findLikesByUser(user);
 
         List<MyLikeDto> likedAlbumsList = likeMapper.albumListToMyLikeDtoList(likes.stream()
@@ -82,8 +81,8 @@ public class LikeService {
         return ResponseEntity.ok(likedAlbums);
     }
 
-    public ResponseEntity<List<LatestLikeDto>> getFriendsLatestLikes(HttpServletRequest request, Integer page) {
-        User user = authService.getUserFromRequest(request).orElseThrow(() -> new RuntimeException("Fetching friends latest likes failed: User making the request not found"));
+    public ResponseEntity<List<LatestLikeDto>> getFriendsLatestLikes(Integer page) {
+        User user = authService.getUserFromSecurityContextHolder();
         List<User> followed = followRepository.findAllByFollowerId(user).stream().map(Follow::getFollowedId).toList();
 
         Sort sort = Sort.by("timestamp").descending();

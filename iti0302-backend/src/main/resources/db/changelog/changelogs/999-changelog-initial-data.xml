@@ -1,0 +1,2065 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+    <changeSet id="2024-01-15 add initial data" author="Morten Tsinakov">
+        <insert tableName="users">
+            <column name="username" value="Albert"/>
+            <column name="password" value="$2a$10$HCZO3UMKPSBW2f7qTVgalOaZ1nBp7FyyWpqk1lawCxXYplkX2EFzO"/>
+            <column name="email" value="albert@email.com"/>
+            <column name="role" value="USER"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="Berta"/>
+            <column name="password" value="$2a$10$Gvg20e56MDqsqiHT7jHPb.Mmo6NFKSESLbM9Q1D/yLhWdxmnjHmQG"/>
+            <column name="email" value="berta@email.com"/>
+            <column name="role" value="USER"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="Charlie"/>
+            <column name="password" value="$2a$10$H2jPPBHMWwHpwhRehMarG.4LsSzzdB//nskYPK9ETFjAfev327lSa"/>
+            <column name="email" value="charlie@email.com"/>
+            <column name="role" value="USER"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="Danielle"/>
+            <column name="password" value="$2a$10$5Gda2Moyn.cKBmTGNHZ3BuPYkbQZCojSP7lShaAFYa/4rsHzNOjwi"/>
+            <column name="email" value="danielle@email.com"/>
+            <column name="role" value="USER"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="Edward"/>
+            <column name="password" value="$2a$10$KMCwayJgLFRd8Lv0o6ZX..bwfvJJ5ocGHyrIEgUkGgipIVei4Yndi"/>
+            <column name="email" value="edward@email.com"/>
+            <column name="role" value="USER"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="Fred"/>
+            <column name="password" value="$2a$10$.HC7tOT8C1HgjZRWQr8NOuydXdKqdErK4R1UyKjbj27z1wh.ODxB6"/>
+            <column name="email" value="fred@email.com"/>
+            <column name="role" value="USER"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="test"/>
+            <column name="password" value="$2a$10$espnEfP2IjR5HCsRpCTTj.J4jbfrLGKMNGAJ8Y2rWmgZGBc88U8ri"/>
+            <column name="email" value="test@email.com"/>
+            <column name="role" value="USER"/>
+        </insert>
+    </changeSet>
+    <changeSet id="2024-15-01 add initial data - albums" author="Morten Tsinakov">
+        <insert tableName="albums">
+            <column name="name" value="Nevermind" />
+            <column name="artist" value="Nirvana" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/570021b68d3d9d2db08bc99a473303b0.jpg" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="Kid A" />
+            <column name="artist" value="Radiohead" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/2ed343318c844d19cd897ec67fad11c4.png" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="Swordfishtrombones" />
+            <column name="artist" value="Tom Waits" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/e8031cdb6ec14a908ca2be5afa2c0de9.png" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="Bitches Brew" />
+            <column name="artist" value="Miles Davis" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/ccff38c96cfd4ae291d8d8347bec4257.png" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="Your Queen Is a Reptile" />
+            <column name="artist" value="Sons of Kemet" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/895125e2983764960c90030d236c353f.jpg" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="Revolver" />
+            <column name="artist" value="The Beatles" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/deaec2d4735bea0d1c45fc75261624ae.jpg" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="Viimane suusataja" />
+            <column name="artist" value="Puuluup" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/a5d03489bc4fb46cf8c9ed848a1d2f5a.jpg" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="Back to Black" />
+            <column name="artist" value="Amy Winehouse" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/5e8b279da10957d060253256c8302f8f.png" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="The Stone Roses" />
+            <column name="artist" value="The Stone Roses" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/f07a5a1e86624b3cb8ec76543b9863d7.png" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="Blue" />
+            <column name="artist" value="Joni Mitchell" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/4be0f660c814dc0164c20ed938dc0003.jpg" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="Mingus Ah Um" />
+            <column name="artist" value="Charles Mingus" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/bb95a707719645438c999b700d4d1633.png" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="Elephant" />
+            <column name="artist" value="The White Stripes" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/8a06f79b16db7d90add1e4cb9afcd5c4.jpg" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="The Dark Side of the Moon" />
+            <column name="artist" value="Pink Floyd" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/d4bdd038cacbec705e269edb0fd38419.png" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="Led Zeppelin" />
+            <column name="artist" value="Led Zeppelin" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/82b68b8267234a289714c0e20c4e288d.png" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="The Rise and Fall of Ziggy Stardust and the Spiders From Mars" />
+            <column name="artist" value="David Bowie" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/3017b2f31110e4f6de45a212fe93b4a3.png" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="Pink Moon" />
+            <column name="artist" value="Nick Drake" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/6e3fd83e52fedeab8e4d59e0d2da1ac9.png" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="Ege Bamyasi" />
+            <column name="artist" value="Can" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/8ad03182ab4e49cf8a39164a9c36c994.jpg" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="Remain in Light" />
+            <column name="artist" value="Talking Heads" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/909484b931449e8fc2e4fecca90b7eb5.png" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="6 Feet Beneath the Moon" />
+            <column name="artist" value="King Krule" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/98e8bfd61e956e6d5a579add73e44f41.jpg" />
+        </insert>
+        <insert tableName="albums">
+            <column name="name" value="The Queen Is Dead" />
+            <column name="artist" value="The Smiths" />
+            <column name="image_url" value="https://lastfm.freetls.fastly.net/i/u/300x300/53442bc27a314142a02d2df018b4161e.png" />
+        </insert>
+    </changeSet>
+    <changeSet id="2024-15-01 add initial data - tracks" author="Morten Tsinakov">
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Smells Like Teen Spirit"/>
+            <column name="duration" value="269"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="In Bloom"/>
+            <column name="duration" value="257"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="Come as You Are"/>
+            <column name="duration" value="253"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Breed"/>
+            <column name="duration" value="175"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Lithium"/>
+            <column name="duration" value="236"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Polly"/>
+            <column name="duration" value="155"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="Territorial Pissings"/>
+            <column name="duration" value="147"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="Drain You"/>
+            <column name="duration" value="211"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="Lounge Act"/>
+            <column name="duration" value="150"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="10"/>
+            <column name="name" value="Stay Away"/>
+            <column name="duration" value="209"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="11"/>
+            <column name="name" value="On a Plain"/>
+            <column name="duration" value="166"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="12"/>
+            <column name="name" value="Something in the Way / Endless, Nameless"/>
+            <column name="duration" value="662"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Everything in Its Right Place"/>
+            <column name="duration" value="315"/>
+            <column name="album_id" value="2"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Kid A"/>
+            <column name="duration" value="255"/>
+            <column name="album_id" value="2"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="The National Anthem"/>
+            <column name="duration" value="289"/>
+            <column name="album_id" value="2"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="How to Disappear Completely"/>
+            <column name="duration" value="384"/>
+            <column name="album_id" value="2"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Treefingers"/>
+            <column name="duration" value="222"/>
+            <column name="album_id" value="2"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Optimistic"/>
+            <column name="duration" value="292"/>
+            <column name="album_id" value="2"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="In Limbo"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="2"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="Idioteque"/>
+            <column name="duration" value="264"/>
+            <column name="album_id" value="2"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="Morning Bell"/>
+            <column name="duration" value="292"/>
+            <column name="album_id" value="2"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="10"/>
+            <column name="name" value="Motion Picture Soundtrack"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="2"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Underground"/>
+            <column name="duration" value="111"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Shore Leave"/>
+            <column name="duration" value="317"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="Dave The Butcher (Instrumental)"/>
+            <column name="duration" value="135"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Johnsburg, Illinois"/>
+            <column name="duration" value="93"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="16 Shells From a Thirty-Ought-Six"/>
+            <column name="duration" value="354"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Town With No Cheer"/>
+            <column name="duration" value="262"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="In the Neighborhood"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="Just Another Sucker On The Vine (Instrumental)"/>
+            <column name="duration" value="102"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="Frank's Wild Years"/>
+            <column name="duration" value="142"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="10"/>
+            <column name="name" value="Swordfishtrombone"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="11"/>
+            <column name="name" value="Down, Down, Down"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="12"/>
+            <column name="name" value="Soldier's Things"/>
+            <column name="duration" value="195"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="13"/>
+            <column name="name" value="Gin Soaked Boy"/>
+            <column name="duration" value="140"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="14"/>
+            <column name="name" value="Trouble's Braids"/>
+            <column name="duration" value="78"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="15"/>
+            <column name="name" value="Rainbirds (Instrumental)"/>
+            <column name="duration" value="185"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Pharaoh's Dance"/>
+            <column name="duration" value="1207"/>
+            <column name="album_id" value="4"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Bitches Brew"/>
+            <column name="duration" value="765"/>
+            <column name="album_id" value="4"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="Spanish Key"/>
+            <column name="duration" value="781"/>
+            <column name="album_id" value="4"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="John McLaughlin"/>
+            <column name="duration" value="262"/>
+            <column name="album_id" value="4"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Miles Runs the Voodoo Down"/>
+            <column name="duration" value="844"/>
+            <column name="album_id" value="4"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Sanctuary"/>
+            <column name="duration" value="194"/>
+            <column name="album_id" value="4"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="My Queen Is Ada Eastman"/>
+            <column name="duration" value="401"/>
+            <column name="album_id" value="5"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="My Queen Is Mamie Phipps Clark"/>
+            <column name="duration" value="331"/>
+            <column name="album_id" value="5"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="My Queen Is Harriet Tubman"/>
+            <column name="duration" value="340"/>
+            <column name="album_id" value="5"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="My Queen Is Anna Julia Cooper"/>
+            <column name="duration" value="307"/>
+            <column name="album_id" value="5"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="My Queen Is Angela Davis"/>
+            <column name="duration" value="395"/>
+            <column name="album_id" value="5"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="My Queen Is Nanny Of The Maroons"/>
+            <column name="duration" value="404"/>
+            <column name="album_id" value="5"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="My Queen Is Yaa Asantewaa"/>
+            <column name="duration" value="424"/>
+            <column name="album_id" value="5"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="My Queen Is Albertina Sisulu"/>
+            <column name="duration" value="320"/>
+            <column name="album_id" value="5"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="My Queen Is Doreen Lawrence"/>
+            <column name="duration" value="407"/>
+            <column name="album_id" value="5"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Taxman"/>
+            <column name="duration" value="158"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Eleanor Rigby"/>
+            <column name="duration" value="128"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="I'm Only Sleeping"/>
+            <column name="duration" value="180"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Love You To"/>
+            <column name="duration" value="179"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Here, There and Everywhere"/>
+            <column name="duration" value="355"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Yellow Submarine"/>
+            <column name="duration" value="160"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="She Said She Said"/>
+            <column name="duration" value="157"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="Good Day Sunshine"/>
+            <column name="duration" value="130"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="And Your Bird Can Sing"/>
+            <column name="duration" value="122"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="10"/>
+            <column name="name" value="For No One"/>
+            <column name="duration" value="618"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="11"/>
+            <column name="name" value="Doctor Robert"/>
+            <column name="duration" value="134"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="12"/>
+            <column name="name" value="I Want to Tell You"/>
+            <column name="duration" value="150"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="13"/>
+            <column name="name" value="Got to Get You Into My Life"/>
+            <column name="duration" value="159"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="14"/>
+            <column name="name" value="Tomorrow Never Knows"/>
+            <column name="duration" value="176"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Paala Järve Vaala Baar"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Viimane Suusataja"/>
+            <column name="duration" value="221"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="Liigutage Vastu"/>
+            <column name="duration" value="196"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Roosad Suusad"/>
+            <column name="duration" value="90"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Üksindus"/>
+            <column name="duration" value="217"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Kaablid Autos Veel"/>
+            <column name="duration" value="75"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="Ülesse"/>
+            <column name="duration" value="226"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="Kohtumispaik On Muudetud"/>
+            <column name="duration" value="195"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="Kasekesed"/>
+            <column name="duration" value="187"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="10"/>
+            <column name="name" value="Tv On The Street"/>
+            <column name="duration" value="176"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="11"/>
+            <column name="name" value="Kultuurisaade"/>
+            <column name="duration" value="44"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="12"/>
+            <column name="name" value="Käpapuu"/>
+            <column name="duration" value="212"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="13"/>
+            <column name="name" value="Lambad ei joo"/>
+            <column name="duration" value="197"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="14"/>
+            <column name="name" value="Tsuiis Demiis"/>
+            <column name="duration" value="202"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Rehab"/>
+            <column name="duration" value="214"/>
+            <column name="album_id" value="8"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="You Know I'm No Good"/>
+            <column name="duration" value="217"/>
+            <column name="album_id" value="8"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="Me &amp; Mr Jones"/>
+            <column name="duration" value="166"/>
+            <column name="album_id" value="8"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Just Friends"/>
+            <column name="duration" value="186"/>
+            <column name="album_id" value="8"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Back to Black"/>
+            <column name="duration" value="239"/>
+            <column name="album_id" value="8"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Love Is a Losing Game"/>
+            <column name="duration" value="155"/>
+            <column name="album_id" value="8"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="Tears Dry on Their Own"/>
+            <column name="duration" value="184"/>
+            <column name="album_id" value="8"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="Wake Up Alone"/>
+            <column name="duration" value="232"/>
+            <column name="album_id" value="8"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="Some Unholy War"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="8"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="10"/>
+            <column name="name" value="He Can Only Hold Her"/>
+            <column name="duration" value="192"/>
+            <column name="album_id" value="8"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="11"/>
+            <column name="name" value="Addicted"/>
+            <column name="duration" value="171"/>
+            <column name="album_id" value="8"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="I Wanna Be Adored"/>
+            <column name="duration" value="294"/>
+            <column name="album_id" value="9"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="she bangs the drums (john leckie original mix)"/>
+            <column name="duration" value="244"/>
+            <column name="album_id" value="9"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="waterfall (2nd mix)"/>
+            <column name="duration" value="273"/>
+            <column name="album_id" value="9"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Bye Bye Bad Man"/>
+            <column name="duration" value="240"/>
+            <column name="album_id" value="9"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Mersey Paradise"/>
+            <column name="duration" value="164"/>
+            <column name="album_id" value="9"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="This Is the One"/>
+            <column name="duration" value="302"/>
+            <column name="album_id" value="9"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="Shoot You Down"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="9"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="Made of Stone"/>
+            <column name="duration" value="253"/>
+            <column name="album_id" value="9"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="Sugar Spun Sister"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="9"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="10"/>
+            <column name="name" value="Don't Stop"/>
+            <column name="duration" value="320"/>
+            <column name="album_id" value="9"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="All I Want"/>
+            <column name="duration" value="265"/>
+            <column name="album_id" value="10"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="My Old Man"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="10"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="Little Green"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="10"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Carey"/>
+            <column name="duration" value="180"/>
+            <column name="album_id" value="10"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Blue"/>
+            <column name="duration" value="172"/>
+            <column name="album_id" value="10"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="California"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="10"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="This Flight Tonight"/>
+            <column name="duration" value="222"/>
+            <column name="album_id" value="10"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="River"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="10"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="A Case of You"/>
+            <column name="duration" value="264"/>
+            <column name="album_id" value="10"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="10"/>
+            <column name="name" value="The Last Time I Saw Richard"/>
+            <column name="duration" value="209"/>
+            <column name="album_id" value="10"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Better Git It in Your Soul"/>
+            <column name="duration" value="444"/>
+            <column name="album_id" value="11"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Goodbye Pork Pie Hat"/>
+            <column name="duration" value="345"/>
+            <column name="album_id" value="11"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="Boogie Stop Shuffle"/>
+            <column name="duration" value="303"/>
+            <column name="album_id" value="11"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Self-Portrait in Three Colors"/>
+            <column name="duration" value="192"/>
+            <column name="album_id" value="11"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Open Letter to Duke"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="11"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Bird Calls"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="11"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="Fables of Faubus"/>
+            <column name="duration" value="371"/>
+            <column name="album_id" value="11"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="Pussy Cat Dues"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="11"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="Jelly Roll"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="11"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Seven Nation Army"/>
+            <column name="duration" value="223"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Black Math"/>
+            <column name="duration" value="178"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="There's No Home for You Here"/>
+            <column name="duration" value="223"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="I Just Don't Know What to Do With Myself"/>
+            <column name="duration" value="398"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="In the Cold, Cold Night"/>
+            <column name="duration" value="227"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="I Want to Be the Boy to Warm Your Mother's Heart"/>
+            <column name="duration" value="208"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="You've Got Her in Your Pocket"/>
+            <column name="duration" value="220"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="Ball and Biscuit"/>
+            <column name="duration" value="619"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="The Hardest Button to Button"/>
+            <column name="duration" value="230"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="10"/>
+            <column name="name" value="Little Acorns"/>
+            <column name="duration" value="249"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="11"/>
+            <column name="name" value="Hypnotize"/>
+            <column name="duration" value="108"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="12"/>
+            <column name="name" value="The Air Near My Fingers"/>
+            <column name="duration" value="220"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="13"/>
+            <column name="name" value="Girl, You Have No Faith in Medicine"/>
+            <column name="duration" value="197"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="14"/>
+            <column name="name" value="It's True That We Love One Another"/>
+            <column name="duration" value="219"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Speak to Me"/>
+            <column name="duration" value="165"/>
+            <column name="album_id" value="13"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Breathe (In the Air)"/>
+            <column name="duration" value="170"/>
+            <column name="album_id" value="13"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="On the Run"/>
+            <column name="duration" value="308"/>
+            <column name="album_id" value="13"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Time"/>
+            <column name="duration" value="391"/>
+            <column name="album_id" value="13"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="The Great Gig in the Sky"/>
+            <column name="duration" value="410"/>
+            <column name="album_id" value="13"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Money"/>
+            <column name="duration" value="521"/>
+            <column name="album_id" value="13"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="Us and Them"/>
+            <column name="duration" value="489"/>
+            <column name="album_id" value="13"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="Any Colour You Like"/>
+            <column name="duration" value="490"/>
+            <column name="album_id" value="13"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="Brain Damage"/>
+            <column name="duration" value="223"/>
+            <column name="album_id" value="13"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="10"/>
+            <column name="name" value="Eclipse"/>
+            <column name="duration" value="139"/>
+            <column name="album_id" value="13"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Good Times Bad Times"/>
+            <column name="duration" value="163"/>
+            <column name="album_id" value="14"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Babe I'm Gonna Leave You"/>
+            <column name="duration" value="401"/>
+            <column name="album_id" value="14"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="You Shook Me"/>
+            <column name="duration" value="695"/>
+            <column name="album_id" value="14"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Dazed and Confused"/>
+            <column name="duration" value="1574"/>
+            <column name="album_id" value="14"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Your Time Is Gonna Come"/>
+            <column name="duration" value="274"/>
+            <column name="album_id" value="14"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Black Mountain Side"/>
+            <column name="duration" value="109"/>
+            <column name="album_id" value="14"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="Communication Breakdown"/>
+            <column name="duration" value="175"/>
+            <column name="album_id" value="14"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="I Can't Quit You Baby"/>
+            <column name="duration" value="407"/>
+            <column name="album_id" value="14"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="How Many More Times"/>
+            <column name="duration" value="503"/>
+            <column name="album_id" value="14"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Five Years"/>
+            <column name="duration" value="245"/>
+            <column name="album_id" value="15"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Soul Love"/>
+            <column name="duration" value="174"/>
+            <column name="album_id" value="15"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="Moonage Daydream"/>
+            <column name="duration" value="377"/>
+            <column name="album_id" value="15"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Starman"/>
+            <column name="duration" value="254"/>
+            <column name="album_id" value="15"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="It Ain't Easy"/>
+            <column name="duration" value="172"/>
+            <column name="album_id" value="15"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Lady Stardust"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="15"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="Star"/>
+            <column name="duration" value="159"/>
+            <column name="album_id" value="15"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="Hang On to Yourself"/>
+            <column name="duration" value="176"/>
+            <column name="album_id" value="15"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="Ziggy Stardust"/>
+            <column name="duration" value="189"/>
+            <column name="album_id" value="15"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="10"/>
+            <column name="name" value="Suffragette City"/>
+            <column name="duration" value="206"/>
+            <column name="album_id" value="15"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="11"/>
+            <column name="name" value="Rock 'n' Roll Suicide"/>
+            <column name="duration" value="270"/>
+            <column name="album_id" value="15"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Pink Moon"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="16"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Place to Be"/>
+            <column name="duration" value="164"/>
+            <column name="album_id" value="16"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="Road"/>
+            <column name="duration" value="118"/>
+            <column name="album_id" value="16"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Which Will"/>
+            <column name="duration" value="176"/>
+            <column name="album_id" value="16"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Horn"/>
+            <column name="duration" value="80"/>
+            <column name="album_id" value="16"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Things Behind the Sun"/>
+            <column name="duration" value="203"/>
+            <column name="album_id" value="16"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="Know"/>
+            <column name="duration" value="143"/>
+            <column name="album_id" value="16"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="Parasite"/>
+            <column name="duration" value="210"/>
+            <column name="album_id" value="16"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="Free Ride"/>
+            <column name="duration" value="186"/>
+            <column name="album_id" value="16"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="10"/>
+            <column name="name" value="Harvest Breed"/>
+            <column name="duration" value="97"/>
+            <column name="album_id" value="16"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="11"/>
+            <column name="name" value="From the Morning"/>
+            <column name="duration" value="145"/>
+            <column name="album_id" value="16"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Pinch"/>
+            <column name="duration" value="570"/>
+            <column name="album_id" value="17"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Sing Swan Song"/>
+            <column name="duration" value="288"/>
+            <column name="album_id" value="17"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="One More Night"/>
+            <column name="duration" value="335"/>
+            <column name="album_id" value="17"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Vitamin C"/>
+            <column name="duration" value="212"/>
+            <column name="album_id" value="17"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Soup"/>
+            <column name="duration" value="162"/>
+            <column name="album_id" value="17"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="I'm So Green"/>
+            <column name="duration" value="185"/>
+            <column name="album_id" value="17"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="Spoon"/>
+            <column name="duration" value="184"/>
+            <column name="album_id" value="17"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Born Under Punches (The Heat Goes On)"/>
+            <column name="duration" value="346"/>
+            <column name="album_id" value="18"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Crosseyed and Painless"/>
+            <column name="duration" value="285"/>
+            <column name="album_id" value="18"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="The Great Curve"/>
+            <column name="duration" value="386"/>
+            <column name="album_id" value="18"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Once in a Lifetime"/>
+            <column name="duration" value="259"/>
+            <column name="album_id" value="18"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Houses in Motion"/>
+            <column name="duration" value="270"/>
+            <column name="album_id" value="18"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Seen and Not Seen"/>
+            <column name="duration" value="200"/>
+            <column name="album_id" value="18"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="Listening Wind"/>
+            <column name="duration" value="282"/>
+            <column name="album_id" value="18"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="The Overload"/>
+            <column name="duration" value="360"/>
+            <column name="album_id" value="18"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="Easy Easy"/>
+            <column name="duration" value="0"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Border Line"/>
+            <column name="duration" value="186"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="Has This Hit?"/>
+            <column name="duration" value="266"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Foreign 2"/>
+            <column name="duration" value="219"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Ceiling"/>
+            <column name="duration" value="176"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Baby Blue"/>
+            <column name="duration" value="216"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="Cementality"/>
+            <column name="duration" value="224"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="A Lizard State"/>
+            <column name="duration" value="274"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="Will I Come"/>
+            <column name="duration" value="114"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="10"/>
+            <column name="name" value="Ocean Bed"/>
+            <column name="duration" value="212"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="11"/>
+            <column name="name" value="Neptune Estate"/>
+            <column name="duration" value="313"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="12"/>
+            <column name="name" value="The Krockadile"/>
+            <column name="duration" value="291"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="13"/>
+            <column name="name" value="Out Getting Ribs"/>
+            <column name="duration" value="256"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="14"/>
+            <column name="name" value="Bathed in Grey"/>
+            <column name="duration" value="242"/>
+            <column name="album_id" value="19"/>
+        </insert>
+    </changeSet>
+    <changeSet id="2024-15-01 add initial data tracks 2" author="Morten Tsinakov">
+        <insert tableName="tracks">
+            <column name="rank" value="1"/>
+            <column name="name" value="The Queen Is Dead"/>
+            <column name="duration" value="251"/>
+            <column name="album_id" value="20"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="2"/>
+            <column name="name" value="Frankly, Mr. Shankly"/>
+            <column name="duration" value="134"/>
+            <column name="album_id" value="20"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="3"/>
+            <column name="name" value="I Know It's Over"/>
+            <column name="duration" value="469"/>
+            <column name="album_id" value="20"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="4"/>
+            <column name="name" value="Never Had No One Ever"/>
+            <column name="duration" value="220"/>
+            <column name="album_id" value="20"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="5"/>
+            <column name="name" value="Cemetry Gates"/>
+            <column name="duration" value="170"/>
+            <column name="album_id" value="20"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="6"/>
+            <column name="name" value="Bigmouth Strikes Again"/>
+            <column name="duration" value="351"/>
+            <column name="album_id" value="20"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="7"/>
+            <column name="name" value="The Boy With The Thorn In His Side"/>
+            <column name="duration" value="227"/>
+            <column name="album_id" value="20"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="8"/>
+            <column name="name" value="Vicar in a Tutu"/>
+            <column name="duration" value="160"/>
+            <column name="album_id" value="20"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="9"/>
+            <column name="name" value="There Is a Light That Never Goes Out"/>
+            <column name="duration" value="245"/>
+            <column name="album_id" value="20"/>
+        </insert>
+        <insert tableName="tracks">
+            <column name="rank" value="10"/>
+            <column name="name" value="Some Girls Are Bigger Than Others"/>
+            <column name="duration" value="195"/>
+            <column name="album_id" value="20"/>
+        </insert>
+    </changeSet>
+    <changeSet id="2025-15-01 add initial data - follows" author="Morten Tsinakov">
+        <insert tableName="follows">
+            <column name="follower_id" value="1"/>
+            <column name="followed_id" value="2"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="1"/>
+            <column name="followed_id" value="3"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="1"/>
+            <column name="followed_id" value="5"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="1"/>
+            <column name="followed_id" value="6"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="1"/>
+            <column name="followed_id" value="7"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="2"/>
+            <column name="followed_id" value="3"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="2"/>
+            <column name="followed_id" value="5"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="2"/>
+            <column name="followed_id" value="6"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="3"/>
+            <column name="followed_id" value="1"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="3"/>
+            <column name="followed_id" value="2"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="3"/>
+            <column name="followed_id" value="6"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="3"/>
+            <column name="followed_id" value="7"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="4"/>
+            <column name="followed_id" value="1"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="4"/>
+            <column name="followed_id" value="2"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="4"/>
+            <column name="followed_id" value="5"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="4"/>
+            <column name="followed_id" value="6"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="5"/>
+            <column name="followed_id" value="1"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="5"/>
+            <column name="followed_id" value="3"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="5"/>
+            <column name="followed_id" value="4"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="5"/>
+            <column name="followed_id" value="7"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="6"/>
+            <column name="followed_id" value="1"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="6"/>
+            <column name="followed_id" value="2"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="6"/>
+            <column name="followed_id" value="4"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="6"/>
+            <column name="followed_id" value="7"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="7"/>
+            <column name="followed_id" value="1"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="7"/>
+            <column name="followed_id" value="2"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="7"/>
+            <column name="followed_id" value="3"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="7"/>
+            <column name="followed_id" value="4"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="7"/>
+            <column name="followed_id" value="5"/>
+        </insert>
+        <insert tableName="follows">
+            <column name="follower_id" value="7"/>
+            <column name="followed_id" value="6"/>
+        </insert>
+    </changeSet>
+    <changeSet id="2024-01-15 add initial data - later listens" author="Morten Tsinakov">
+        <insert tableName="later-listens">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="2"/>
+        </insert>
+        <insert tableName="later-listens">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="5"/>
+        </insert>
+        <insert tableName="later-listens">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="later-listens">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="later-listens">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="9"/>
+        </insert>
+        <insert tableName="later-listens">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="11"/>
+        </insert>
+        <insert tableName="later-listens">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="13"/>
+        </insert>
+        <insert tableName="later-listens">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="16"/>
+        </insert>
+    </changeSet>
+    <changeSet id="2024-01-15 add initial data - likes" author="Morten Tsinakov">
+        <insert tableName="likes">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="4"/>
+            <column name="album_id" value="14"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="6"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="1"/>
+            <column name="album_id" value="1"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="2"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="3"/>
+            <column name="album_id" value="9"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="2"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="5"/>
+            <column name="album_id" value="16"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="6"/>
+            <column name="album_id" value="18"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="5"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="4"/>
+            <column name="album_id" value="15"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="1"/>
+            <column name="album_id" value="2"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="3"/>
+            <column name="album_id" value="10"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="8"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="1"/>
+            <column name="album_id" value="3"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="11"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="6"/>
+            <column name="album_id" value="14"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="2"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="13"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="5"/>
+            <column name="album_id" value="17"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="3"/>
+            <column name="album_id" value="11"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="17"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="4"/>
+            <column name="album_id" value="16"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="1"/>
+            <column name="album_id" value="4"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="18"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="1"/>
+            <column name="album_id" value="5"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="6"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="3"/>
+            <column name="album_id" value="12"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="5"/>
+            <column name="album_id" value="18"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="20"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="2"/>
+            <column name="album_id" value="8"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="6"/>
+            <column name="album_id" value="9"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="1"/>
+            <column name="album_id" value="6"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="4"/>
+            <column name="album_id" value="17"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="2"/>
+            <column name="album_id" value="9"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="5"/>
+            <column name="album_id" value="19"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="6"/>
+            <column name="album_id" value="2"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="1"/>
+            <column name="album_id" value="7"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="3"/>
+            <column name="album_id" value="13"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="5"/>
+            <column name="album_id" value="20"/>
+        </insert>
+        <insert tableName="likes">
+            <column name="user_id" value="6"/>
+            <column name="album_id" value="1"/>
+        </insert>
+    </changeSet>
+    <changeSet id="2024-01-15 add initial data - ratings" author="Morten Tsinakov">
+        <insert tableName="ratings">
+            <column name="user_id" value="1"/>
+            <column name="album_id" value="1"/>
+            <column name="rating" value="8"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="2"/>
+            <column name="album_id" value="3"/>
+            <column name="rating" value="7"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="3"/>
+            <column name="album_id" value="5"/>
+            <column name="rating" value="3"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="4"/>
+            <column name="album_id" value="7"/>
+            <column name="rating" value="5"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="5"/>
+            <column name="album_id" value="9"/>
+            <column name="rating" value="9"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="6"/>
+            <column name="album_id" value="11"/>
+            <column name="rating" value="10"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="13"/>
+            <column name="rating" value="6"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="1"/>
+            <column name="album_id" value="15"/>
+            <column name="rating" value="6"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="2"/>
+            <column name="album_id" value="17"/>
+            <column name="rating" value="8"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="3"/>
+            <column name="album_id" value="19"/>
+            <column name="rating" value="7"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="4"/>
+            <column name="album_id" value="2"/>
+            <column name="rating" value="6"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="5"/>
+            <column name="album_id" value="4"/>
+            <column name="rating" value="8"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="6"/>
+            <column name="album_id" value="5"/>
+            <column name="rating" value="10"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="16"/>
+            <column name="rating" value="9"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="1"/>
+            <column name="album_id" value="3"/>
+            <column name="rating" value="8"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="2"/>
+            <column name="album_id" value="7"/>
+            <column name="rating" value="5"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="3"/>
+            <column name="album_id" value="7"/>
+            <column name="rating" value="8"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="4"/>
+            <column name="album_id" value="9"/>
+            <column name="rating" value="8"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="5"/>
+            <column name="album_id" value="5"/>
+            <column name="rating" value="4"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="6"/>
+            <column name="album_id" value="13"/>
+            <column name="rating" value="2"/>
+        </insert>
+        <insert tableName="ratings">
+            <column name="user_id" value="7"/>
+            <column name="album_id" value="17"/>
+            <column name="rating" value="10"/>
+        </insert>
+    </changeSet>
+    <changeSet id="2024-01-15 add initial data - reviews" author="Morten Tsinakov">
+        <insert tableName="reviews">
+            <column name="user_id" value="1" />
+            <column name="album_id" value="1" />
+            <column name="review" value="A mesmerizing journey through diverse sonic landscapes, blending haunting melodies with intricate rhythms, creating an immersive experience that lingers long after the last note fades." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="1" />
+            <column name="album_id" value="2" />
+            <column name="review" value="Despite its attempt at creating atmosphere, the album's repetitive nature becomes monotonous, making it a challenging listen that loses its appeal quickly." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="1" />
+            <column name="album_id" value="3" />
+            <column name="review" value="An album with a mix of different sounds, but it can feel a bit disjointed at times, making it hard to connect with a consistent vibe." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="1" />
+            <column name="album_id" value="7" />
+            <column name="review" value="This record tries to blend the old and the new, but the execution falls flat, leaving it in a somewhat awkward musical limbo." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="1" />
+            <column name="album_id" value="8" />
+            <column name="review" value="A forgettable collection of tracks that, despite their catchiness, struggle to leave a lasting impression, leaving the listener yearning for more substance." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="1" />
+            <column name="album_id" value="9" />
+            <column name="review" value="While experimenting with genres, this album loses its way, resulting in a confusing mishmash of styles that fails to establish a clear identity." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="1" />
+            <column name="album_id" value="13" />
+            <column name="review" value="This album seamlessly fuses nostalgic vibes with a modern twist, delivering a refreshing take on a classic sound that's both infectious and thought-provoking." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="2" />
+            <column name="album_id" value="14" />
+            <column name="review" value="Despite its attempt to explore emotions, the lyrics come off as cliché, and the overall composition lacks the depth needed to make a lasting impact." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="2" />
+            <column name="album_id" value="15" />
+            <column name="review" value="With its infectious grooves and soulful vocals, this album is a celebration of rhythm and melody, offering a feel-good experience that's impossible to resist." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="2" />
+            <column name="album_id" value="19" />
+            <column name="review" value="Nostalgia takes center stage, but the lack of innovation makes it feel like a tired rehash of past musical eras, failing to bring anything new to the table." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="2" />
+            <column name="album_id" value="20" />
+            <column name="review" value="A cool album with lots of different sounds that you can vibe to, making it a good background for whatever you're up to." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="2" />
+            <column name="album_id" value="1" />
+            <column name="review" value="Despite trying to set a mood, the album gets kinda boring after a while, like it's stuck in a loop." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="3" />
+            <column name="album_id" value="5" />
+            <column name="review" value="It's got a bunch of different tunes, but sometimes it feels a bit all over the place, making it a bit hard to get into." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="3" />
+            <column name="album_id" value="6" />
+            <column name="review" value="This one's like mixing the old stuff with the new, but it doesn't quite hit the mark, leaving you in a bit of a musical no-man's-land." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="3" />
+            <column name="album_id" value="7" />
+            <column name="review" value="Some catchy tunes, but they don't really stick, and you're left wanting something with a bit more substance." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="3" />
+            <column name="album_id" value="11" />
+            <column name="review" value="It's trying to be all experimental with the music styles, but it gets confusing, and you're not sure what's going on." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="3" />
+            <column name="album_id" value="12" />
+            <column name="review" value="This album's got a good mix of old and new vibes, making it easy to enjoy without overthinking it." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="3" />
+            <column name="album_id" value="13" />
+            <column name="review" value="Tries to be deep, but the lyrics are kinda cheesy, and the whole thing feels a bit flat." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="4" />
+            <column name="album_id" value="17" />
+            <column name="review" value="A fun album with groovy beats and catchy singing that just makes you wanna dance and forget everything else." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="4" />
+            <column name="album_id" value="18" />
+            <column name="review" value="It's all about looking back, but it feels like they're not bringing anything new to the table, making it a bit meh." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="4" />
+            <column name="album_id" value="19" />
+            <column name="review" value="A chill album with diverse vibes, good for background tunes." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="4" />
+            <column name="album_id" value="3" />
+            <column name="review" value="A genre-blending delight, this album seamlessly merges nostalgic vibes with a modern twist." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="5" />
+            <column name="album_id" value="4" />
+            <column name="review" value="Gets boring quick, stuck in a repetitive loop." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="5" />
+            <column name="album_id" value="5" />
+            <column name="review" value="Solid mix of old and new vibes for easy enjoyment." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="5" />
+            <column name="album_id" value="9" />
+            <column name="review" value="Despite catchy tunes, this album falls into the forgettable realm, with tracks lacking substance." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="5" />
+            <column name="album_id" value="10" />
+            <column name="review" value="An experimental mishmash of styles, this album's attempt to explore diverse genres results in a confusing journey that lacks a clear musical identity." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="5" />
+            <column name="album_id" value="11" />
+            <column name="review" value="With its infectious grooves and soulful vocals, this album is a celebration of rhythm and melody, offering a feel-good experience that's impossible to resist." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="5" />
+            <column name="album_id" value="15" />
+            <column name="review" value="Fun with groovy beats, makes you wanna dance." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="5" />
+            <column name="album_id" value="16" />
+            <column name="review" value="A fun and groovy album, with infectious beats and soulful vocals, making it impossible to resist the urge to move and dance along." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="6" />
+            <column name="album_id" value="17" />
+            <column name="review" value="Nostalgia takes center stage, but the lack of innovation makes this album feel like a tired rehash of past musical eras, falling short of bringing anything new to the table." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="6" />
+            <column name="album_id" value="1" />
+            <column name="review" value="Nostalgic but lacking innovation, a bit meh overall." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="6" />
+            <column name="album_id" value="2" />
+            <column name="review" value="Attempting to bridge the gap between old and new, this album struggles to find its musical footing, resulting in an awkward blend that fails to establish a distinct identity." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="7" />
+            <column name="album_id" value="3" />
+            <column name="review" value="A cool, diverse album for background vibes." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="7" />
+            <column name="album_id" value="6" />
+            <column name="review" value="Catchy, but forgettable and lacks depth." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="7" />
+            <column name="album_id" value="7" />
+            <column name="review" value="With infectious grooves and catchy vocals, this album is a joyful celebration of rhythm and melody, providing a feel-good experience that stays with you." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="7" />
+            <column name="album_id" value="8" />
+            <column name="review" value="An ambitious experiment with various sounds, this album feels scattered, lacking a cohesive identity and leaving the listener trying to make sense of its abrupt transitions between genres." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="7" />
+            <column name="album_id" value="11" />
+            <column name="review" value="Despite its attempt to create atmosphere, this album's repetitive nature becomes monotonous, making it a challenging listen that quickly loses its initial appeal." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="7" />
+            <column name="album_id" value="12" />
+            <column name="review" value="Effortlessly blending haunting melodies with intricate rhythms, this album takes listeners on a captivating journey through diverse sonic landscapes." />
+        </insert>
+        <insert tableName="reviews">
+            <column name="user_id" value="7" />
+            <column name="album_id" value="13" />
+            <column name="review" value="This album weaves a mesmerizing tapestry of diverse sonic landscapes, effortlessly blending haunting melodies with intricate rhythms." />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

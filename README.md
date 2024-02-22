@@ -60,6 +60,6 @@ PS! You have to add to application.properties:
 - Last.fm API key (can be created on last.fm website).
 
 Without Last.fm API key the album search function doesn't work and fetching album info works only if the album is already in the database.
-I added some initial data using Liquibase, so it's possible to get a feel of the app even without the search function. You can log in using the following credentials:
+Some initial data is added to the database on first running the program, so it's possible to get a feel of the app even without registering an API key (it's better with the search function, though). You can log in using those credentials:
 - username: test
 - password: password

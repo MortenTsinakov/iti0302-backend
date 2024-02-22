@@ -1,7 +1,7 @@
 package ee.taltech.iti0302_veebiarendus_backend.album.service;
 
-import ee.taltech.iti0302_veebiarendus_backend.album.entity.Review;
-import ee.taltech.iti0302_veebiarendus_backend.album.repository.ReviewRepository;
+import ee.taltech.iti0302_veebiarendus_backend.review.entity.Review;
+import ee.taltech.iti0302_veebiarendus_backend.review.repository.ReviewRepository;
 import ee.taltech.iti0302_veebiarendus_backend.album.service.helper.apiAlbumInfoClasses.AlbumInfoResult;
 import ee.taltech.iti0302_veebiarendus_backend.album.service.helper.apiSearchClasses.SearchResults;
 import ee.taltech.iti0302_veebiarendus_backend.auth.service.AuthenticationService;
@@ -10,7 +10,7 @@ import ee.taltech.iti0302_veebiarendus_backend.album.dto.albumDto.AlbumSearchDto
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.albumDto.AlbumStatsInfoDto;
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.albumDto.AlbumUserInfoDto;
 import ee.taltech.iti0302_veebiarendus_backend.album.entity.Album;
-import ee.taltech.iti0302_veebiarendus_backend.album.entity.Rating;
+import ee.taltech.iti0302_veebiarendus_backend.rate.entity.Rating;
 import ee.taltech.iti0302_veebiarendus_backend.album.entity.Track;
 import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.AlbumNotFoundException;
 import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.ApiProcessingException;
@@ -18,9 +18,9 @@ import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.Inval
 import ee.taltech.iti0302_veebiarendus_backend.album.mapper.albumMapper.AlbumInfoMapper;
 import ee.taltech.iti0302_veebiarendus_backend.album.mapper.albumMapper.AlbumSearchMapper;
 import ee.taltech.iti0302_veebiarendus_backend.album.repository.AlbumRepository;
-import ee.taltech.iti0302_veebiarendus_backend.album.repository.LaterListenRepository;
-import ee.taltech.iti0302_veebiarendus_backend.album.repository.LikeRepository;
-import ee.taltech.iti0302_veebiarendus_backend.album.repository.RatingRepository;
+import ee.taltech.iti0302_veebiarendus_backend.later_listen.repository.LaterListenRepository;
+import ee.taltech.iti0302_veebiarendus_backend.like.repository.LikeRepository;
+import ee.taltech.iti0302_veebiarendus_backend.rate.repository.RatingRepository;
 import ee.taltech.iti0302_veebiarendus_backend.album.repository.TrackRepository;
 import ee.taltech.iti0302_veebiarendus_backend.album.service.helper.ApiHelper;
 import lombok.RequiredArgsConstructor;

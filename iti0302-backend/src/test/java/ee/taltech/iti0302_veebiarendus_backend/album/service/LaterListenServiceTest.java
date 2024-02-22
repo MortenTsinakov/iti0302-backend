@@ -1,16 +1,17 @@
 package ee.taltech.iti0302_veebiarendus_backend.album.service;
 
-import ee.taltech.iti0302_veebiarendus_backend.album.dto.laterListenDto.LaterListenRequest;
-import ee.taltech.iti0302_veebiarendus_backend.album.dto.laterListenDto.LaterListenResponse;
-import ee.taltech.iti0302_veebiarendus_backend.album.dto.laterListenDto.MyLaterListenDto;
+import ee.taltech.iti0302_veebiarendus_backend.later_listen.dto.LaterListenRequest;
+import ee.taltech.iti0302_veebiarendus_backend.later_listen.dto.LaterListenResponse;
+import ee.taltech.iti0302_veebiarendus_backend.later_listen.dto.MyLaterListenDto;
 import ee.taltech.iti0302_veebiarendus_backend.album.entity.Album;
-import ee.taltech.iti0302_veebiarendus_backend.album.entity.LaterListen;
-import ee.taltech.iti0302_veebiarendus_backend.album.mapper.laterListenMapper.LaterListenMapper;
+import ee.taltech.iti0302_veebiarendus_backend.later_listen.entity.LaterListen;
+import ee.taltech.iti0302_veebiarendus_backend.later_listen.mapper.LaterListenMapper;
 import ee.taltech.iti0302_veebiarendus_backend.album.repository.AlbumRepository;
-import ee.taltech.iti0302_veebiarendus_backend.album.repository.LaterListenRepository;
+import ee.taltech.iti0302_veebiarendus_backend.later_listen.repository.LaterListenRepository;
 import ee.taltech.iti0302_veebiarendus_backend.auth.service.AuthenticationService;
 import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.AlbumNotFoundException;
 import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.InvalidOperationException;
+import ee.taltech.iti0302_veebiarendus_backend.later_listen.service.LaterListenService;
 import ee.taltech.iti0302_veebiarendus_backend.user.entity.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

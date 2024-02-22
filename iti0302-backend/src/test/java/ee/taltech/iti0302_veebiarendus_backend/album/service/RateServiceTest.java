@@ -1,18 +1,19 @@
 package ee.taltech.iti0302_veebiarendus_backend.album.service;
 
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.albumDto.AlbumSearchDto;
-import ee.taltech.iti0302_veebiarendus_backend.album.dto.ratingDto.LatestRatingDto;
-import ee.taltech.iti0302_veebiarendus_backend.album.dto.ratingDto.RatingRequest;
-import ee.taltech.iti0302_veebiarendus_backend.album.dto.ratingDto.RatingResponse;
+import ee.taltech.iti0302_veebiarendus_backend.rate.dto.LatestRatingDto;
+import ee.taltech.iti0302_veebiarendus_backend.rate.dto.RatingRequest;
+import ee.taltech.iti0302_veebiarendus_backend.rate.dto.RatingResponse;
 import ee.taltech.iti0302_veebiarendus_backend.album.entity.Album;
-import ee.taltech.iti0302_veebiarendus_backend.album.entity.Rating;
-import ee.taltech.iti0302_veebiarendus_backend.album.mapper.ratingMapper.RatingMapper;
+import ee.taltech.iti0302_veebiarendus_backend.rate.entity.Rating;
+import ee.taltech.iti0302_veebiarendus_backend.rate.mapper.RatingMapper;
 import ee.taltech.iti0302_veebiarendus_backend.album.repository.AlbumRepository;
-import ee.taltech.iti0302_veebiarendus_backend.album.repository.RatingRepository;
+import ee.taltech.iti0302_veebiarendus_backend.rate.repository.RatingRepository;
 import ee.taltech.iti0302_veebiarendus_backend.auth.service.AuthenticationService;
 import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.InvalidInputException;
 import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.InvalidOperationException;
 import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.UserNotFoundException;
+import ee.taltech.iti0302_veebiarendus_backend.rate.service.RateService;
 import ee.taltech.iti0302_veebiarendus_backend.user.dto.UserDto;
 import ee.taltech.iti0302_veebiarendus_backend.user.entity.Follow;
 import ee.taltech.iti0302_veebiarendus_backend.user.entity.User;

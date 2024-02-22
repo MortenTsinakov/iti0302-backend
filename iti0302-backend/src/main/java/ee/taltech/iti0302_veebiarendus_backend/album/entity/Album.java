@@ -1,5 +1,6 @@
 package ee.taltech.iti0302_veebiarendus_backend.album.entity;
 
+import ee.taltech.iti0302_veebiarendus_backend.review.entity.Review;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

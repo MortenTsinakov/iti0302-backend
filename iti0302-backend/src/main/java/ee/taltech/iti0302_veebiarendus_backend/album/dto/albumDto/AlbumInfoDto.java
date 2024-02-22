@@ -1,6 +1,6 @@
 package ee.taltech.iti0302_veebiarendus_backend.album.dto.albumDto;
 
-import ee.taltech.iti0302_veebiarendus_backend.album.dto.reviewDto.ReviewResponse;
+import ee.taltech.iti0302_veebiarendus_backend.review.dto.ReviewResponse;
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.trackDto.TrackDto;
 
 import java.util.List;

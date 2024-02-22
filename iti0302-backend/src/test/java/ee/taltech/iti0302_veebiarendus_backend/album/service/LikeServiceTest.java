@@ -1,18 +1,19 @@
 package ee.taltech.iti0302_veebiarendus_backend.album.service;
 
 import ee.taltech.iti0302_veebiarendus_backend.album.dto.albumDto.AlbumSearchDto;
-import ee.taltech.iti0302_veebiarendus_backend.album.dto.likeDto.LatestLikeDto;
-import ee.taltech.iti0302_veebiarendus_backend.album.dto.likeDto.LikeRequest;
-import ee.taltech.iti0302_veebiarendus_backend.album.dto.likeDto.LikeResponse;
-import ee.taltech.iti0302_veebiarendus_backend.album.dto.likeDto.MyLikeDto;
+import ee.taltech.iti0302_veebiarendus_backend.like.dto.LatestLikeDto;
+import ee.taltech.iti0302_veebiarendus_backend.like.dto.LikeRequest;
+import ee.taltech.iti0302_veebiarendus_backend.like.dto.LikeResponse;
+import ee.taltech.iti0302_veebiarendus_backend.like.dto.MyLikeDto;
 import ee.taltech.iti0302_veebiarendus_backend.album.entity.Album;
-import ee.taltech.iti0302_veebiarendus_backend.album.entity.Like;
-import ee.taltech.iti0302_veebiarendus_backend.album.mapper.likeMapper.LikeMapper;
+import ee.taltech.iti0302_veebiarendus_backend.like.entity.Like;
+import ee.taltech.iti0302_veebiarendus_backend.like.mapper.LikeMapper;
 import ee.taltech.iti0302_veebiarendus_backend.album.repository.AlbumRepository;
-import ee.taltech.iti0302_veebiarendus_backend.album.repository.LikeRepository;
+import ee.taltech.iti0302_veebiarendus_backend.like.repository.LikeRepository;
 import ee.taltech.iti0302_veebiarendus_backend.auth.service.AuthenticationService;
 import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.InvalidOperationException;
 import ee.taltech.iti0302_veebiarendus_backend.exception.custom_exceptions.UserNotFoundException;
+import ee.taltech.iti0302_veebiarendus_backend.like.service.LikeService;
 import ee.taltech.iti0302_veebiarendus_backend.user.dto.UserDto;
 import ee.taltech.iti0302_veebiarendus_backend.user.entity.Follow;
 import ee.taltech.iti0302_veebiarendus_backend.user.entity.User;

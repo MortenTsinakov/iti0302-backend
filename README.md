@@ -63,3 +63,12 @@ Without Last.fm API key the album search function doesn't work and fetching albu
 Some initial data is added to the database when first running the program, so it's possible to get a feel of the app even without registering an API key (it's better with the search function, though, so registering the API key is recommended). You can log in using those credentials:
 - username: test
 - password: password
+
+#### Screenshots of the app
+
+<div style="display:flex; justify-content: space-between;">
+    <img src="screenshots/onelouder_01.png" alt="Screenshot 1" style="width:30%;">
+    <img src="screenshots/onelouder_02.png" alt="Screenshot 1" style="width:30%;">
+    <img src="screenshots/onelouder_03.png" alt="Screenshot 1" style="width:30%;">
+</div>
+

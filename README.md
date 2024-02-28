@@ -1,4 +1,4 @@
-This project was made while taking Web Application Project (iti0302) lecture in Taltech.
+This project was developped as part of the Web Application Project (iti0302) course in Taltech.
 
 ## OneLouder
 
@@ -53,13 +53,13 @@ spring.jpa.hibernate.ddl-auto=update
 external.api.key = <external_api_key>
 jwt.secret.key = JdLE5TJpQf2bt9duhHYdjcaUZToux9i8i64yvhJKXLbm8cX7bn
 ```
-4. Run 'docker compose up' command from where the compose file for database is located
-5. Run the project from IntelliJ or with './gradlew bootRun' command
+4. Run ```docker compose up``` command from where the compose file for database is located
+5. Run the project from IntelliJ or with ```./gradlew bootRun``` command
 
-PS! You have to add to application.properties:
+PS! For the album search function to work you have to add to application.properties (external.api.key variable):
 - Last.fm API key (can be created on last.fm website).
 
 Without Last.fm API key the album search function doesn't work and fetching album info works only if the album is already in the database.
-Some initial data is added to the database on first running the program, so it's possible to get a feel of the app even without registering an API key (it's better with the search function, though). You can log in using those credentials:
+Some initial data is added to the database when first running the program, so it's possible to get a feel of the app even without registering an API key (it's better with the search function, though, so registering the API key is recommended). You can log in using those credentials:
 - username: test
 - password: password

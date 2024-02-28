@@ -25,7 +25,7 @@ A music app designed for enthusiasts who want a straightforward way to manage th
 #### Setting up the development environment
 
 1. Clone the project
-2. Create a docker compose file for the database: <br>
+2. Create a docker compose file for the database (name it docker-compose.yml for example): <br>
 ```yaml
 services:
   postgres:
@@ -54,7 +54,7 @@ external.api.key = <external_api_key>
 jwt.secret.key = JdLE5TJpQf2bt9duhHYdjcaUZToux9i8i64yvhJKXLbm8cX7bn
 ```
 4. Run ```docker compose up``` command from where the compose file for database is located
-5. Run the project from IntelliJ or with ```./gradlew bootRun``` command
+5. Run the project from your IDE or with ```./gradlew bootRun``` command (from the directory where 'gradlew' file is located)
 
 PS! For the album search function to work you have to add to application.properties (external.api.key variable):
 - Last.fm API key (can be created on last.fm website).

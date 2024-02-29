@@ -39,7 +39,7 @@ services:
     ports:
       - "5432:5432"
 ```
-3. Create an application.properties file in src/main/resources: <br>
+3. Create an application.properties file for development in src/main/resources: <br>
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
 spring.datasource.username=postgres

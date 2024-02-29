@@ -48,8 +48,6 @@ spring.datasource.driver-class-name=org.postgresql.Driver
 
 spring.liquibase.change-log=classpath:/db/changelog/changelog-master.xml
 
-spring.jpa.hibernate.ddl-auto=update
-
 external.api.key = <external_api_key>
 jwt.secret.key = JdLE5TJpQf2bt9duhHYdjcaUZToux9i8i64yvhJKXLbm8cX7bn
 ```

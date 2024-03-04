@@ -64,9 +64,21 @@ Some initial data is added to the database when first running the program, so it
 
 #### Screenshots of the app
 
-<div style="display:flex; justify-content: space-between;">
-    <img src="screenshots/onelouder_01.png" alt="Screenshot 1" style="width:30%;">
-    <img src="screenshots/onelouder_02.png" alt="Screenshot 1" style="width:30%;">
-    <img src="screenshots/onelouder_03.png" alt="Screenshot 1" style="width:30%;">
-</div>
+<table>
+  <tr>
+    <td><img src="screenshots/onelouder_01.png" alt="GIF 1" style="width:100%;"></td>
+    <td><img src="screenshots/onelouder_02.png" alt="GIF 2" style="width:100%;"></td>
+    <td><img src="screenshots/onelouder_03.png" alt="GIF 3" style="width:100%;"></td>
+  </tr>
+</table>
+
+#### GIF
+
+<table>
+  <tr>
+    <td><img src="screenshots/onelouder_01.gif" alt="GIF 1" style="width:100%;"></td>
+    <td><img src="screenshots/onelouder_02.gif" alt="GIF 2" style="width:100%;"></td>
+    <td><img src="screenshots/onelouder_03.gif" alt="GIF 3" style="width:100%;"></td>
+  </tr>
+</table>
 

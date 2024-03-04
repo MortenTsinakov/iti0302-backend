@@ -65,8 +65,8 @@ Some initial data is added to the database when first running the program, so it
 #### Screenshots of the app
 
 <div style="display:flex; justify-content: space-between;">
-    <img src="screenshots/onelouder_01.mp4" alt="Screenshot 1" style="width:30%;">
-    <img src="screenshots/onelouder_02.mp4" alt="Screenshot 1" style="width:30%;">
+    <img src="screenshots/onelouder_01.png" alt="Screenshot 1" style="width:30%;">
+    <img src="screenshots/onelouder_02.png" alt="Screenshot 1" style="width:30%;">
     <img src="screenshots/onelouder_03.png" alt="Screenshot 1" style="width:30%;">
 </div>
 
